@@ -209,20 +209,30 @@ would be to use an existing implementation when one exists.
 
 ### Starter Code
 
--   The `src/main/java/edu/unl/cse/csce361/book_management/blackboard` directory contains:
-    -   `CSVReaderWriter.java` is available if you want to use it to read a CSV file to populate the blackboard with books.
+-   The `src/main/java/edu/unl/cse/csce361/book_management/blackboard`
+    directory contains:
+    -   `CSVReaderWriter.java` is available if you want to use it to read a CSV
+        file to populate the blackboard with books.
     -   `Book.java` is an incomplete interface definition for book objects.
 
--   `books.csv` is available in the `src/main/resources/csv` directory. It only has a couple of books; you'll want to add more, and possibly add more fields.
+-   `books.csv` is available in the `src/main/resources/csv` directory. It only
+    has a couple of books; you'll want to add more, and possibly add more
+    fields.
 
--   `CLI.java` is the beginning of a console-based menuing system. You are not obliged to use it.
+-   `CLI.java` is the beginning of a console-based menuing system. You are not
+    obliged to use it.
 
 ![Starter Code](28-starter_diagram-Book_Management_System.png)
 
--   The `src/main/java/edu/unl/cse/csce361/book_management/commands` directory contains:
-    -   `Command.java` is an interface that's part of the Command Pattern. Implementations should override `java.lang.Object.toString()` to provide the string to be displayed on the menu.
+-   The `src/main/java/edu/unl/cse/csce361/book_management/commands` directory
+    contains:
+    -   `Command.java` is an interface that's part of the Command Pattern.
+        Implementations should override `java.lang.Object.toString()` to
+        provide the string to be displayed on the menu.
     -   `ExitCommand.java` is an example implementation of `Command.java`
-    -   `SetDateCommand.java` is the beginning of another implementation of `Command.java`; you will need to finish it after you have a way to set the date in your blackboard datastore.
+    -   `SetDateCommand.java` is the beginning of another implementation of
+        `Command.java`; you will need to finish it after you have a way to set
+        the date in your blackboard datastore.
 
 ### Functional Requirements
 
@@ -247,7 +257,7 @@ would be to use an existing implementation when one exists.
 -   The user shall be able to display a sorted list of books.
 
 -   Implement all user stories in
-    [`28-user_stories-Book_Managmenet_System.md`](28-user_stories-Book_Managment_System.md) ***(forthcoming)***
+    [`28-user_stories-Book_Managmenet_System.md`](28-user_stories-Book_Managment_System.md)
 
 -   When the program starts up, the blackboard's date should be the current
     system date on your computer. Thereafter, the user shall be able to update
