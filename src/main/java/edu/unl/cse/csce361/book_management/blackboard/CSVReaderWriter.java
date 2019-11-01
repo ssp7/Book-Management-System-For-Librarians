@@ -2,7 +2,7 @@
  * CSV Reader/Writer, copyright (c) 2019 Christopher A. Bohn, bohn@unl.edu.
  */
 
-package edu.unl.cse.csce361.course_registration.backend;
+package edu.unl.cse.csce361.book_management.blackboard;
 
 import java.io.*;
 import java.net.URL;

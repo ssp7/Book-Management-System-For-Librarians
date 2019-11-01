@@ -1,7 +1,7 @@
 # Book Management System
 
--   Assignment Due: November 8, 2019 at 9:30am
--   Peer Assessment Due: November 8, 2019 at 11:59pm
+-   Assignment Due: November 11, 2019 at 9:30am
+-   Peer Assessment Due: November 11, 2019 at 11:59pm
 
 In this assignment you will implement part of a simple library book management
 system. Most of the functional requirements come from user stories prepared by
@@ -69,11 +69,10 @@ functionality.
 
 ### Architecture
 
-The system should have a blackboard architecture; specifically, a three-tier
-architecture.  These should be opaque layers.  See Kung p156.
+The system should have a blackboard architecture. See Kung p156.
 
 At a minimum, your blackboard datastore shall track the status of all books in
-the system. You may read from a CSV or JSON file to initialize the datatore;
+the system. You may read from a CSV or JSON file to initialize the datastore;
 there is no requirement to save updates to a file. The datastore shall also
 know the book management system's current date (which is not necessarily the
 date in your computer).
