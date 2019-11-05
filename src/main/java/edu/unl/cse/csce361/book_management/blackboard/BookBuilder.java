@@ -1,57 +1,69 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-public class Books implements Book {
-
-    public String author;
-    public String title;
-    public String callNumber;
-    public String status;
-	@Override
-	public int compareTo(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-   public void setAuthor(String author) {
-	   this.author = author;
-   }
-   
-	@Override
-public String toString() {
-	return "Books [author=" + author + ", title=" + title + ", callNumber=" + callNumber + ", status=" + status
-			+ ", getCallNumber()=" + getCallNumber() + ", getAuthor()=" + getAuthor() + ", getTitle()=" + getTitle()
-			+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public void setTitle(String title) {
+public class BookBuilder{
+	
+	private String callnumber;
+	private String title;
+	private String author;
+	
+	public BookBuilder() {
+		
+		this.callnumber = callnumber;
 		this.title = title;
+		this.author = author;
 	}
 
-	public void setCallNumber(String callNumber) {
-		this.callNumber = callNumber;
+	public BookBuilder setCallnumber(String callnumber) {
+		this.callnumber = callnumber;
+		return this;
+	}
+	public BookBuilder setTitle(String title) {
+		this.title = title;
+		return this;
+	}
+	public BookBuilder setAuthor(String author) {
+		this.author = author;
+		return this;
 	}
 
-	@Override
-	public String getCallNumber() {
-		// TODO Auto-generated method stub
-		return callNumber;
-	}
-
-	@Override
-	public String getAuthor() {
-		// TODO Auto-generated method stub
-		return author;
-	}
-
-	@Override
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return title;
+	public Book build() {
+		return new ConcreteBook(callnumber, title, author);
 	}
 	
+	private class ConcreteBook implements Book{
+		private String callnumber;
+		private String author;
+		private String title;
+		ConcreteBook(String callnumber, String title, String author){
+			
+		}
+
+		@Override
+		public int compareTo(Object o) {
+			// TODO Auto-generated method stub
+		
+			return 0;
+		}
+
+		@Override
+		public String getCallNumber() {
+			// TODO Auto-generated method stub
+			
+			return callnumber;
+		}
+
+		@Override
+		public String getAuthor() {
+			// TODO Auto-generated method stub
+			return author;
+		}
+
+		@Override
+		public String getTitle() {
+			// TODO Auto-generated method stub
+			return title;
+		}
+		
+	}
 
 }
