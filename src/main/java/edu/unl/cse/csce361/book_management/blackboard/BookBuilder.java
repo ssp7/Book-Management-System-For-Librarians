@@ -5,14 +5,19 @@ public class BookBuilder{
 	private String callnumber;
 	private String title;
 	private String author;
+	private String status;
 	
 	public BookBuilder() {
 		
-		this.callnumber = callnumber;
-		this.title = title;
-		this.author = author;
+		this.callnumber = null;
+		this.title = "title is unknown";
+		this.author = "author is unknown";
+		this.status = " Status is unknown ";
 	}
-
+    public BookBuilder setStatus(String status) {
+    	this.status = status;
+    	return this;
+    }
 	public BookBuilder setCallnumber(String callnumber) {
 		this.callnumber = callnumber;
 		return this;
@@ -27,14 +32,13 @@ public class BookBuilder{
 	}
 
 	public Book build() {
-		return new ConcreteBook(callnumber, title, author);
+		return new ConcreteBook(callnumber, title, author, status);
 	}
 	
 	private class ConcreteBook implements Book{
-		private String callnumber;
-		private String author;
-		private String title;
-		ConcreteBook(String callnumber, String title, String author){
+
+		ConcreteBook(String callnumber, String title, String author, String status){
+		    
 			
 		}
 
@@ -63,6 +67,9 @@ public class BookBuilder{
 			// TODO Auto-generated method stub
 			return title;
 		}
+	    public String getStatus() {
+	    	return status;
+	    }
 		
 	}
 
