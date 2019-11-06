@@ -35,21 +35,8 @@ public class BookConverter {
 				 Book b = builder.build();
 				   arrBooks.add(b); 	   
 			}
-			System.out.println(arrBooks.get(0).getTitle());
-			System.out.println(arrBooks.get(1).getTitle());
-			System.out.println(arrBooks.get(2).getTitle());
-			
-
 		return arrBooks;
 	}
-  
-	public static void main(String[] args) {
-		
-bookConvert("books.csv");
-		
-		
-		
-		
-	}
+
 	
 }
