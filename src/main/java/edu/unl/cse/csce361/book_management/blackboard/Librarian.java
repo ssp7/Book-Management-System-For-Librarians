@@ -86,8 +86,6 @@ input again
                 }
                 Book newBook = build.build();
                 arrBooks.add(newBook);
-                System.out.println(newBook.getSummary());
-
             } catch (Exception e) {
                 System.out.println("You did not input the integers, You need to input the integers again");
             }
