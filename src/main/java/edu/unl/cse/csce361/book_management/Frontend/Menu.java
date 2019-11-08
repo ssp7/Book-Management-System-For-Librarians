@@ -11,6 +11,7 @@ public class Menu {
         Scanner scanner =new Scanner(System.in);
         int UserInput=scanner.nextInt();
 
+
         switch (UserInput){
             case 1:
                 System.out.println("what do you want to do? ");
@@ -36,12 +37,13 @@ public class Menu {
                         System.out.println("Invalid input");
                         break;
                 }
+                break;
             case 2:
                 System.out.println("What do you want to do?");
                 System.out.println("Type 1 for searching Book by Author or Title");
                 System.out.println("Type 2 for addBook to Cart As Patron");
-                int UserChoose2 = scanner.nextInt();
-                switch (UserChoose2){
+                UserChoose = scanner.nextInt();
+                switch (UserChoose){
                     case 1:
                         Patron.searchBookbyAuthorOrTitle();
                         break;
