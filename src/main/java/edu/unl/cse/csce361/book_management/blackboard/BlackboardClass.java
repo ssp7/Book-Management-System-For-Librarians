@@ -13,7 +13,7 @@ amount of copies of book from user.
     public void addBookAsLibrarian() {
         librarian.addBookAsLibrarian();
         setChanged();
-        notifyObservers("New book came to catelog");
+
     }
     
     public static void searchBookbyAuthorOrTitle() {
@@ -23,7 +23,9 @@ amount of copies of book from user.
     public  void removeBookAsLibrarian() {
       librarian.removeBookAsLibrarian();
       setChanged();
+
       notifyObservers(patron);
+
     }
     
     public void addBookToCartAsPatron() {
