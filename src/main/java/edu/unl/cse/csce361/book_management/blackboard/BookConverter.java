@@ -1,7 +1,6 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
 import java.awt.List;
-import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -10,11 +9,8 @@ public class BookConverter {
 	
 	public static ArrayList<Book> bookConvert( String filename){
 	    ArrayList<Book> arrBooks = new ArrayList<Book>();
-		ArrayList<BookBuilder> arrBookBuilder = new ArrayList<BookBuilder>();
+		
 		Set<Map<String, String>> csvSet = CSVReaderWriter.readCSV(filename);
-	
-	
-			
 			 
 			for( Map<String,String> mapping : csvSet) {
 				 BookBuilder builder = new BookBuilder();
@@ -31,12 +27,20 @@ public class BookConverter {
 				if(mapping.get("CallNumber") != null && mapping.get("CallNumber").length() >= 1) {
 					builder.setCallnumber(mapping.get("CallNumber"));
 				}
-				
+				if(mapping.get("Summary") != null && mapping.get("Summary").length() >= 1) {
+					builder.setSummary(mapping.get("Summary"));
+				}
+				 
 				 Book b = builder.build();
-				   arrBooks.add(b); 	   
+				   arrBooks.add(b); 
+				 
 			}
+			  
 		return arrBooks;
 	}
-
+public static void main(String []args) {
+	
+	bookConvert("books.csv");
+}
 	
 }

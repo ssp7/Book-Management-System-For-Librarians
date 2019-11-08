@@ -4,4 +4,7 @@ public interface Book extends Comparable {
     String getCallNumber();
     String getAuthor();
     String getTitle();
+    String getStatus();
+    String getSummary();
+    int getCopyNumber();
 }
