@@ -45,50 +45,53 @@ public class Librarian implements Observer
 
 
 	}
-	/*   
-	Read the Author name, Summary of book,
-	amount of copies of book from user.
-	 */
-	public void addBookAsLibrarian() {
-		Boolean NeedToLoop = true;
+/*
+Read the Author name, Summary of book,
+amount of copies of book from user.if
+the user input null for author,title,summary 
+or copyNumber to 0, it will output you should 
+input again
+ */
+	public static void addBookAsLibrarian() {
+        Boolean NeedToLoop = true;
 
-		while (NeedToLoop) {
-			Scanner scan = new Scanner(System.in);
-			System.out.println("Please enter Author");
-			String author = scan.nextLine();
-			System.out.println("Please enter Title of the Book");
-			String title = scan.nextLine();
-			System.out.println("Please enter Summary of the Book");
-			String summary = scan.nextLine();
-			System.out.println("Please enter amount of copies you want to add");
-			try {
-				int copyNumber = scan.nextInt();
-				BookBuilder build = new BookBuilder();
-				if (author != null && author.length() > 0) {
-					build.setAuthor(author);
-					NeedToLoop = false;
-				}
-				if (title != null && title.length() > 0) {
-					build.setAuthor(title);
-					NeedToLoop = false;
-				}
-				if (summary != null && summary.length() > 0) {
-					build.setSummary(summary);
-					NeedToLoop = false;
-				}
-				if (copyNumber != 0) {
-					build.setCopyNumber(copyNumber);
-					NeedToLoop = false;
-				}
-				Book newBook = build.build();
-				arrBooks.add(newBook);
+        while (NeedToLoop) {
+             Scanner scan = new Scanner(System.in);
+            System.out.println("Please enter Author");
+            String author = scan.nextLine();
+            System.out.println("Please enter Title of the Book");
+            String title = scan.nextLine();
+            System.out.println("Please enter Summary of the Book");
+            String summary = scan.nextLine();
+            System.out.println("Please enter amount of copies you want to add");
+            try {
+                int copyNumber = scan.nextInt();
+                BookBuilder build = new BookBuilder();
+                if (author ==null &&title == null&&summary == null||copyNumber == 0){
+                    NeedToLoop = true;
+                }
+                if (author != null && author.length() > 0) {
+                    build.setAuthor(author);
+                }
+                if (title != null && title.length() > 0) {
+                    build.setAuthor(title);
+                }
+                if (summary != null && summary.length() > 0) {
+                    build.setSummary(summary);
+                }
+                if (copyNumber != 0) {
+                    build.setCopyNumber(copyNumber);
+                }
+                Book newBook = build.build();
+                arrBooks.add(newBook);
+                System.out.println(newBook.getSummary());
 
-			} catch (Exception e) {
-				System.out.println("You did not input the integers, You need to input the integers again");
-			}
-		}
-
-	}
+            } catch (Exception e) {
+                System.out.println("You did not input the integers, You need to input the integers again");
+            }
+        }
+        scan.close();
+    }
 
 	public static void removeBookAsLibrarian() {
 		System.out.println("Please enter catalog number of the book you want to remove");
