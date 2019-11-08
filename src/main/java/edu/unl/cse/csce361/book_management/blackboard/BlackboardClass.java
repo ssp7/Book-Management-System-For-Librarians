@@ -3,7 +3,7 @@ package edu.unl.cse.csce361.book_management.blackboard;
 import java.util.Observable;
 import java.util.Set;
 
-public class BlackboardClass extends Observable {
+    public class BlackboardClass extends Observable {
 	static Librarian librarian = new Librarian();
     static Patron patron = new Patron();
 /*   
@@ -13,6 +13,7 @@ amount of copies of book from user.
     public void addBookAsLibrarian() {
         librarian.addBookAsLibrarian();
         setChanged();
+        notifyObservers("A new book is added to catalog");
 
     }
     
@@ -24,14 +25,14 @@ amount of copies of book from user.
       librarian.removeBookAsLibrarian();
       setChanged();
 
-      notifyObservers(patron);
+      notifyObservers("A book has been removed from the catelog");
 
     }
     
     public void addBookToCartAsPatron() {
       patron.addBookToCartAsPatron();
       setChanged();
-      notifyObservers(librarian);
+      notifyObservers("A patron added a book to the cart");
     }
     
     public static void printCatalog() {
@@ -40,7 +41,7 @@ amount of copies of book from user.
     public void updateBookInfo() {
     	librarian.updateBookInfo();
     	setChanged();
-    	notifyObservers(patron);
+    	notifyObservers("A book is updated with correct information");
     	
     }
 }
