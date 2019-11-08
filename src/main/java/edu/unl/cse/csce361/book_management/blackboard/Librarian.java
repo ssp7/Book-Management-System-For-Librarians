@@ -52,7 +52,7 @@ the user input null for author,title,summary
 or copyNumber to 0, it will output you should 
 input again
  */
-	public static void addBookAsLibrarian() {
+    public static void addBookAsLibrarian() {
         Boolean NeedToLoop = true;
 
         while (NeedToLoop) {
@@ -69,6 +69,8 @@ input again
                 BookBuilder build = new BookBuilder();
                 if (author ==null &&title == null&&summary == null||copyNumber == 0){
                     NeedToLoop = true;
+                }else {
+                    NeedToLoop =false;
                 }
                 if (author != null && author.length() > 0) {
                     build.setAuthor(author);
