@@ -48,8 +48,11 @@ public class Patron implements Observer {
 		this.date = date;
 	}
 	@Override
-	public void update(Observable BlackboardClass, Object Books) {
-	
+	public void update(Observable b, Object Books) {
+	 
+		System.out.println("New book is added to a catalog");
+
+		
 		
 	}
 	
@@ -106,7 +109,7 @@ public class Patron implements Observer {
 	      arrPatron.add(newPatron);
 	        
 	    }
-
+    
 	    private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
 	        System.out.println("Author :- "+ AuthorName);
 	        System.out.println("Title :- "+ TitleName);

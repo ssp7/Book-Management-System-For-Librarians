@@ -95,6 +95,34 @@ public class BookBuilder extends Observable{
 			// TODO Auto-generated method stub
 			return copyNumber;
 		}
+
+		@Override
+		public String setAuthor(String newAuthor) {
+			// TODO Auto-generated method stub
+			author = newAuthor;
+			return author;
+		}
+
+		@Override
+		public String setTitle(String newTitle) {
+			// TODO Auto-generated method stub
+			title = newTitle;
+			return title;
+		}
+
+		@Override
+		public String setSummary(String newSummary) {
+			// TODO Auto-generated method stub
+			summary = newSummary;
+			return summary;
+		}
+
+		@Override
+		public String setCallNumber(String newCallNumber) {
+			// TODO Auto-generated method stub
+			callnumber = newCallNumber;
+			return callnumber;
+		}
 		
 	}
 
