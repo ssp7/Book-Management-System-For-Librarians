@@ -1,64 +1,57 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
+        import java.util.ArrayList;
+        import java.util.Observable;
+        import java.util.Observer;
+        import java.util.Scanner;
+        import java.time.format.DateTimeFormatter;
+        import java.time.LocalDateTime;
 
 public class Patron implements Observer {
+
+    /*
+    This part for all parameters
+     */
     static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
     static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
     static Scanner scan = new Scanner(System.in);
     static Librarian librarian = new Librarian();
     public String name;
     public Book bookInCart;
-    public Book getBookInCart() {
-        return bookInCart;
-    }
+    public ArrayList<Book> booksInCart;
+    public ArrayList<Book> booksCheckedOut;
+    public String date;
+
+
+    /*
+    This part for all get method and set method
+     */
     public void AddBookIntoCart(Book bookInCart) {
         booksInCart.add(bookInCart);
     }
     public  void  CartSetup(){
         booksInCart =new ArrayList<>();
     }
-    public ArrayList<Book> booksInCart;
-    public ArrayList<Book> booksCheckedOut;
-    public String date;
-    public String getName() {
-        return name;
-    }
     public void setName(String name) {
         this.name = name;
-    }
-    public ArrayList<Book> getBooksInCart() {
-        return booksInCart;
-    }
-    public void setBooksInCart(ArrayList<Book> booksInCart) {
-        this.booksInCart = booksInCart;
-    }
-    public ArrayList<Book> getBooksCheckedOut() {
-        return booksCheckedOut;
-    }
-    public void setBooksCheckedOut(ArrayList<Book> booksCheckedOut) {
-        this.booksCheckedOut = booksCheckedOut;
-    }
-    public String getDate() {
-        return date;
     }
     public void setDate(String date) {
         this.date = date;
     }
+
+
+
     @Override
     public void update(Observable b, Object Books) {
-
         System.out.println("New book is added to a catalog");
-
-
-
     }
 
+
+    /*
+    This part for search book for author or book title
+    if the title or author name can not be found in
+    database, it will loop again
+     */
     public static void searchBookbyAuthorOrTitle() {
         System.out.println("If you like to search by author then press 1 or If you like to search by title press 2");
         int search = scan.nextInt();
@@ -86,6 +79,12 @@ public class Patron implements Observer {
 
 
     }
+
+    /*
+    This part is for adding the book to cart as a
+    patron, if the author name can not be found in
+    database,it can be loop again
+     */
     public static void addBookToCartAsPatron() {
 
         Patron newPatron = new Patron();
@@ -112,6 +111,7 @@ public class Patron implements Observer {
             arrPatron.add(newPatron);
         }
     }
+
 
     private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
         System.out.println("Author :- "+ AuthorName);
@@ -186,4 +186,5 @@ public class Patron implements Observer {
         return NeedToLoop;
     }
 }
+
 
