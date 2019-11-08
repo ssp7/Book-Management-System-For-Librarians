@@ -140,9 +140,13 @@ public class BlackboardClass extends Observable {
 		System.out.println("Please enter your Name");
 		String patronName = scan.nextLine();
 		System.out.println("Please enter the author of the book");
+		
 	
 	}
-
+  public static void printCatalog() {
+	  
+	  
+  }
 
 
 	public static void main(String[] args) {
