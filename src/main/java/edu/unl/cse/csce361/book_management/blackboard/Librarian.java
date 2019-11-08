@@ -1,112 +1,118 @@
 package edu.unl.cse.csce361.book_management.blackboard;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-public class Patron implements Observer {
+public class Librarian implements Observer
+{
+	
+	public String name;
+	public Book book;
+	public ArrayList<Book> arrayBook;
     static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
     static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
     static Scanner scan = new Scanner(System.in);
     static Librarian librarian = new Librarian();
-	public String name;
-	public Book bookInCart;
-	public Book getBookInCart() {
-		return bookInCart;
-	}
-	public void setBookInCart(Book bookInCart) {
-		this.bookInCart = bookInCart;
-	    booksInCart.add(this.bookInCart);
-	}
-	public ArrayList<Book> booksInCart;
-	public ArrayList<Book> booksCheckedOut;
-	public int date;
+	
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<Book> getBooksInCart() {
-		return booksInCart;
+
+	public Book getBook() {
+		return book;
 	}
-	public void setBooksInCart(ArrayList<Book> booksInCart) {
-		this.booksInCart = booksInCart;
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
-	public ArrayList<Book> getBooksCheckedOut() {
-		return booksCheckedOut;
+
+	public ArrayList<Book> getArrayBook() {
+		return arrayBook;
 	}
-	public void setBooksCheckedOut(ArrayList<Book> booksCheckedOut) {
-		this.booksCheckedOut = booksCheckedOut;
+
+	public void setArrayBook(ArrayList<Book> arrayBook) {
+		this.arrayBook = arrayBook;
 	}
-	public int getDate() {
-		return date;
-	}
-	public void setDate(int date) {
-		this.date = date;
-	}
+
 	@Override
-	public void update(Observable BlackboardClass, Object Books) {
-	
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	 public static void searchBookbyAuthorOrTitle() {
-	        System.out.println("If you like to search by author then press 1 or If you like to search by title press 2");
-	        int search = scan.nextInt();
-	        scan.nextLine();
+	/*   
+	Read the Author name, Summary of book,
+	amount of copies of book from user.
+	 */
+	    public void addBookAsLibrarian() {
 	        Boolean NeedToLoop = true;
+
 	        while (NeedToLoop) {
-	            if (search == 1) {
-	                System.out.println("Please enter the author name");
-	                String authorName = scan.nextLine();
-	                NeedToLoop = CheckValidityInput(authorName);
-	                if (NeedToLoop){
-	                    System.out.println("You input is invalid which can not match in the author name of database");
+	             Scanner scan = new Scanner(System.in);
+	            System.out.println("Please enter Author");
+	            String author = scan.nextLine();
+	            System.out.println("Please enter Title of the Book");
+	            String title = scan.nextLine();
+	            System.out.println("Please enter Summary of the Book");
+	            String summary = scan.nextLine();
+	            System.out.println("Please enter amount of copies you want to add");
+	            try {
+	                int copyNumber = scan.nextInt();
+	                BookBuilder build = new BookBuilder();
+	                if (author != null && author.length() > 0) {
+	                    build.setAuthor(author);
+	                    NeedToLoop = false;
 	                }
-	                Loop(authorName, "author_name");
-	            } else if (search == 2) {
-	                System.out.println("Please enter the title of the book");
-	                String titleName = scan.nextLine();
-	                NeedToLoop = CheckValidityInput(titleName);
-	                if (NeedToLoop){
-	                    System.out.println("You input is invalid which can not match in the titleName of database");
+	                if (title != null && title.length() > 0) {
+	                    build.setAuthor(title);
+	                    NeedToLoop = false;
 	                }
-	                Loop(titleName, "Title");
+	                if (summary != null && summary.length() > 0) {
+	                    build.setSummary(summary);
+	                    NeedToLoop = false;
+	                }
+	                if (copyNumber != 0) {
+	                    build.setCopyNumber(copyNumber);
+	                    NeedToLoop = false;
+	                }
+	                Book newBook = build.build();
+	                arrBooks.add(newBook);
+
+	            } catch (Exception e) {
+	                System.out.println("You did not input the integers, You need to input the integers again");
 	            }
 	        }
-
-
+	     
 	    }
-	 public static void addBookToCartAsPatron() {
-	     Patron newPatron = new Patron();
-			
-			System.out.println("Please enter your Name");
-			String patronName = scan.nextLine();
-			newPatron.setName(patronName);
-			System.out.println("Please enter the author of the book");
-			String authorName = scan.nextLine();
-	        
+	 
+	    public static void removeBookAsLibrarian() {
+	        System.out.println("Please enter catalog number of the book you want to remove");
+	        String catalogNumber = scan.nextLine();
+	        for(int i = 0; i<arrBooks.size(); i++) {
+	            if(arrBooks.get(i).getCallNumber().equalsIgnoreCase(catalogNumber)) {
+	                arrBooks.remove(i);
+	            }
+	        }
+	    }
+	    public static void printCatalog() {
+	    	
 			for(int i = 0; i<arrBooks.size();i++) {
-				if(arrBooks.get(i).getAuthor().equalsIgnoreCase(authorName))
-				{
-					newPatron.setBookInCart(arrBooks.get(i));
-				}
-				else {
-					System.out.println("Please enter correct author name");
-					authorName = scan.nextLine();
-					i = 0;
-				}
-			}
-			Date today = new Date();
-	        newPatron.setDate(today.getDate());
-	        
-	      arrPatron.add(newPatron);
-	        
-	    }
+				System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
+				if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
 
+					System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
+				System.out.println("Title :- "+ arrBooks.get(i).getTitle());
+				System.out.println("Status :- "+ arrBooks.get(i).getStatus());
+				System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
+				System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+			}
+
+
+	    }
 	    private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
 	        System.out.println("Author :- "+ AuthorName);
 	        System.out.println("Title :- "+ TitleName);
@@ -179,4 +185,7 @@ public class Patron implements Observer {
 	            }
 	        return NeedToLoop;
 	    }
+
+
+
 }

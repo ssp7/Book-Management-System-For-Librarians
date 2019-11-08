@@ -1,8 +1,12 @@
 package edu.unl.cse.csce361.book_management;
 
 import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
+import edu.unl.cse.csce361.book_management.commands.AddBookToCartAsPatron;
 import edu.unl.cse.csce361.book_management.commands.Command;
 import edu.unl.cse.csce361.book_management.commands.ExitCommand;
+import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
+import edu.unl.cse.csce361.book_management.commands.RemoveBookAsLibrarian;
+import edu.unl.cse.csce361.book_management.commands.SearchBookByAuthorOrTitle;
 import edu.unl.cse.csce361.book_management.commands.SetDateCommand;
 
 import java.util.ArrayList;
@@ -36,7 +40,10 @@ public class CLI {
         addCommand(new ExitCommand(this));
         addCommand(new SetDateCommand());
         addCommand(new AddBookAsLibrarian());
-        
+        addCommand(new SearchBookByAuthorOrTitle());
+        addCommand(new RemoveBookAsLibrarian());
+        addCommand(new AddBookToCartAsPatron());
+        addCommand(new PrintCatalog());
         
     }
 
@@ -49,11 +56,7 @@ public class CLI {
             System.out.println("Please enter the number to execute the command");
             int input = scan.nextInt();
             scan.nextLine();
-            if(input == 2) {
             commands.get(input).execute();
-            scan.close();
-            }
-        
         }
     }
 
