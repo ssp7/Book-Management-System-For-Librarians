@@ -8,6 +8,7 @@ import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
 import edu.unl.cse.csce361.book_management.commands.RemoveBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.SearchBookByAuthorOrTitle;
 import edu.unl.cse.csce361.book_management.commands.SetDateCommand;
+import edu.unl.cse.csce361.book_management.commands.UpdateBookInfoAsLibrarian;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class CLI {
         addCommand(new RemoveBookAsLibrarian());
         addCommand(new AddBookToCartAsPatron());
         addCommand(new PrintCatalog());
+        addCommand(new UpdateBookInfoAsLibrarian());
         
     }
 

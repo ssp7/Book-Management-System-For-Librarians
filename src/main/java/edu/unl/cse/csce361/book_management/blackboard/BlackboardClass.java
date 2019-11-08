@@ -1,11 +1,7 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-import java.nio.file.attribute.AclEntry.Builder;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
-import java.util.Scanner;
+import java.util.Set;
 
 public class BlackboardClass extends Observable {
 	static Librarian librarian = new Librarian();
@@ -16,6 +12,7 @@ amount of copies of book from user.
  */
     public void addBookAsLibrarian() {
         librarian.addBookAsLibrarian();
+        setChanged();
         notifyObservers(patron);
     }
     public static void searchBookbyAuthorOrTitle() {
@@ -24,16 +21,23 @@ amount of copies of book from user.
     }
     public  void removeBookAsLibrarian() {
       librarian.removeBookAsLibrarian();
+      setChanged();
       notifyObservers();
     }
     public void addBookToCartAsPatron() {
       patron.addBookToCartAsPatron();
+      setChanged();
       notifyObservers(librarian);
         
     }
     public static void printCatalog() {
       librarian.printCatalog();
     }
-
+    public void updateBookInfo() {
+    	librarian.updateBookInfo();
+    	setChanged();
+    	notifyObservers(patron);
+    	
+    }
 }
 
