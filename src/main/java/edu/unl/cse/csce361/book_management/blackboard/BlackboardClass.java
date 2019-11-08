@@ -13,8 +13,9 @@ amount of copies of book from user.
     public void addBookAsLibrarian() {
         librarian.addBookAsLibrarian();
         setChanged();
-        notifyObservers(patron);
+        notifyObservers("New book came to catelog");
     }
+    
     public static void searchBookbyAuthorOrTitle() {
       patron.searchBookbyAuthorOrTitle();
 
@@ -22,14 +23,15 @@ amount of copies of book from user.
     public  void removeBookAsLibrarian() {
       librarian.removeBookAsLibrarian();
       setChanged();
-      notifyObservers();
+      notifyObservers(patron);
     }
+    
     public void addBookToCartAsPatron() {
       patron.addBookToCartAsPatron();
       setChanged();
       notifyObservers(librarian);
-        
     }
+    
     public static void printCatalog() {
       librarian.printCatalog();
     }

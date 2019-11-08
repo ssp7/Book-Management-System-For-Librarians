@@ -1,5 +1,6 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -100,15 +101,16 @@ public class Librarian implements Observer
 		}
 	}
 	public static void printCatalog() {
+		Collections.sort(arrBooks);
 		for(int i = 0; i<arrBooks.size();i++) {
-			System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
-			if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
-
+			if(!arrBooks.get(i).getStatus().equalsIgnoreCase("Missing")) {
+				System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");	
 				System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
-			System.out.println("Title :- "+ arrBooks.get(i).getTitle());
-			System.out.println("Status :- "+ arrBooks.get(i).getStatus());
-			System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
-			System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+				System.out.println("Title :- "+ arrBooks.get(i).getTitle());
+				System.out.println("Status :- "+ arrBooks.get(i).getStatus());
+				System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
+				System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+			}
 		}
 	}
 
@@ -127,6 +129,7 @@ public class Librarian implements Observer
 					System.out.println("Please enter new author name");
 					String newAuthorName = scan.nextLine();
 					arrBooks.get(b).setAuthor(newAuthorName);
+					b = arrBooks.size();
 				}
 				else {
 					System.out.println("Please enter correct author name for book");
@@ -143,6 +146,7 @@ public class Librarian implements Observer
 					System.out.println("Please enter new title name");
 					String newTitleName = scan.nextLine();
 					arrBooks.get(b).setTitle(newTitleName);
+					b = arrBooks.size();
 				}
 				else {
 					System.out.println("Please enter correct title for book");
@@ -159,6 +163,7 @@ public class Librarian implements Observer
 					System.out.println("Please enter new title name");
 					String newCallName = scan.nextLine();
 					arrBooks.get(b).setCallNumber(newCallName);
+					b = arrBooks.size();
 				}
 				else {
 					System.out.println("Please enter correct title for book");
@@ -166,10 +171,10 @@ public class Librarian implements Observer
 					b = 0;
 				}
 			}
-			
-			
+
+
 		}
-		
+
 	}
 	private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
 		System.out.println("Author :- "+ AuthorName);

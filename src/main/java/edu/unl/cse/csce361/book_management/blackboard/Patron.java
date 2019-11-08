@@ -49,14 +49,10 @@ public class Patron implements Observer {
 	}
 	@Override
 	public void update(Observable b, Object Books) {
-	 
-		System.out.println("New book is added to a catalog");
-
-		
-		
+	 	
 	}
 	
-	 public static void searchBookbyAuthorOrTitle() {
+	 public void searchBookbyAuthorOrTitle() {
 	        System.out.println("If you like to search by author then press 1 or If you like to search by title press 2");
 	        int search = scan.nextInt();
 	        scan.nextLine();
@@ -109,7 +105,7 @@ public class Patron implements Observer {
 	      arrPatron.add(newPatron);
 	        
 	    }
-    
+
 	    private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
 	        System.out.println("Author :- "+ AuthorName);
 	        System.out.println("Title :- "+ TitleName);
@@ -182,4 +178,6 @@ public class Patron implements Observer {
 	            }
 	        return NeedToLoop;
 	    }
+	    
+	    
 }
