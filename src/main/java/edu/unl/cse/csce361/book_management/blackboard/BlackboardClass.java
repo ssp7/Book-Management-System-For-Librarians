@@ -2,12 +2,14 @@ package edu.unl.cse.csce361.book_management.blackboard;
 
 import java.nio.file.attribute.AclEntry.Builder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Scanner;
 
 public class BlackboardClass extends Observable {
 
 	static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
+	static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
 	static Scanner scan = new Scanner(System.in);
 
 	public static void addBookAsLibrarian() {
@@ -121,41 +123,55 @@ public class BlackboardClass extends Observable {
 			}
 		}
 
-    
+
 	}
 	public static void removeBookAsPatron() {
 		System.out.println("Please enter catalog number of the book you want to remove");
 		String catalogNumber = scan.nextLine();
-		
-		
+
+
 		for(int i = 0; i<arrBooks.size(); i++) {
 			if(arrBooks.get(i).getCallNumber().equalsIgnoreCase(catalogNumber)) {
 				arrBooks.remove(i);
 			}
 		}
-	
+
 	}
 	public static void addBookToCartAsPatron() {
 
+		Patron newPatron = new Patron();
+		
 		System.out.println("Please enter your Name");
 		String patronName = scan.nextLine();
+		newPatron.setName(patronName);
 		System.out.println("Please enter the author of the book");
-		
-	
+		String authorName = scan.nextLine();
+        
+		for(int i = 0; i<arrBooks.size();i++) {
+			if(arrBooks.get(i).getAuthor().equalsIgnoreCase(authorName))
+			{
+				newPatron.setBookInCart(arrBooks.get(i));
+			}
+		}
+		Date today = new Date();
+        newPatron.setDate(today.getDate());
+        
+      arrPatron.add(newPatron);
 	}
-  public static void printCatalog() {
-	  
-	  
-  }
+	public static void printCatalog() {
+
+		for(int i = 0; i<arrBooks.size();i++) {
+			System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
+			if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
+
+				System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
+			System.out.println("Title :- "+ arrBooks.get(i).getTitle());
+			System.out.println("Status :- "+ arrBooks.get(i).getStatus());
+			System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
+			System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+		}
 
 
-	public static void main(String[] args) {
-		
-	
-		searchBookbyAuthorOrTitle();
-		
-	
-		
 	}
 
 
