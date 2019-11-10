@@ -224,7 +224,7 @@ it should loop again
                         book.AddPatron(PatronName);
                         break;
                     case 4:
-                        book.PlacePatronFrontInHoldList(PatronName);
+                        book.RemovePatronInHoldList(PatronName);
                         break;
 
                 }
@@ -234,4 +234,5 @@ it should loop again
 
     }
 }
+
 
