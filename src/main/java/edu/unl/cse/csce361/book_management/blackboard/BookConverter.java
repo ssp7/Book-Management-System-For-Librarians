@@ -38,17 +38,13 @@ public class BookConverter {
 					
 				 
 				 Book b = builder.build();
-				 System.out.println(b.getCopyNumber());
+				
 				   arrBooks.add(b); 
 				 
 			}
 			  
 		return arrBooks;
 	}
-	
-public static void main(String []args) {
-	
-	bookConvert("books.csv");
-}
+
 	
 }
