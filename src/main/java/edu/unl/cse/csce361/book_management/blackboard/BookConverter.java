@@ -6,45 +6,50 @@ import java.util.Map;
 import java.util.Set;
 
 public class BookConverter {
-	
-	public static ArrayList<Book> bookConvert( String filename){
-	    ArrayList<Book> arrBooks = new ArrayList<Book>();
-		
-		Set<Map<String, String>> csvSet = CSVReaderWriter.readCSV(filename);
-			 
-			for( Map<String,String> mapping : csvSet) {
-				 BookBuilder builder = new BookBuilder();
-				if(mapping.get("Author") != null && mapping.get("Author").length() >=1) {
-					
-					builder.setAuthor(mapping.get("Author"));
-				}
-				if(mapping.get("Status") != null && mapping.get("Status").length() >= 1) {
-					builder.setStatus(mapping.get("Status"));
-				}
-				if(mapping.get("Title") != null && mapping.get("Title").length() >= 1) {
-					builder.setTitle(mapping.get("Title"));
-				}
-				if(mapping.get("CallNumber") != null && mapping.get("CallNumber").length() >= 1) {
-					builder.setCallnumber(mapping.get("CallNumber"));
-				}
-				if(mapping.get("Summary") != null && mapping.get("Summary").length() >= 1) {
-					builder.setSummary(mapping.get("Summary"));
-				}
-				String copynumber = mapping.get("Copynumber");
-				
-				if(copynumber != null && copynumber.length() > 0) {
-					builder.setCopyNumber(Integer.parseInt(copynumber));
-				}
-					
-				 
-				 Book b = builder.build();
-				
-				   arrBooks.add(b); 
-				 
-			}
-			  
-		return arrBooks;
-	}
+    /*
+    This bookConvert method is to converting CSV file into
+    Arraylist, the acceptance is that the content in each
+    column should be not be null
+     */
 
-	
+    public static ArrayList<Book> bookConvert( String filename){
+        ArrayList<Book> arrBooks = new ArrayList<Book>();
+
+        Set<Map<String, String>> csvSet = CSVReaderWriter.readCSV(filename);
+        
+        
+/*
+convert all contents in csv file
+into arraylist for containing Book 
+Type
+ */
+        for( Map<String,String> mapping : csvSet) {
+            BookBuilder builder = new BookBuilder();
+            CheckingValidtyOfCSV(mapping,builder,"Author");
+            CheckingValidtyOfCSV(mapping,builder,"Status");
+            CheckingValidtyOfCSV(mapping,builder,"Title");
+            CheckingValidtyOfCSV(mapping,builder,"CallNumber");
+            CheckingValidtyOfCSV(mapping,builder,"Summary");
+            Book b = builder.build();
+            arrBooks.add(b);
+        }
+
+        return arrBooks;
+    }
+
+    /*
+    Extracting the print message into
+    function to avoid the duplicated code
+     */
+    public static void CheckingValidtyOfCSV(Map<String,String> mapping,BookBuilder builder,String Type){
+        if(mapping.get(Type) != null && mapping.get(Type).length() >= 1) {
+            builder.setAuthor(mapping.get(Type));
+        }
+        
+    }
+    public static void main(String []args) {
+        bookConvert("books.csv");
+    }
+
 }
+
