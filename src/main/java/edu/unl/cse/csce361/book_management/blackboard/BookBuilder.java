@@ -61,9 +61,9 @@ public class BookBuilder extends Observable{
 
         }
         private  <E> void swap(ArrayList<E> list,int index1,int index2) {
-            //定义第三方变量
+            //å®šä¹‰ç¬¬ä¸‰æ–¹å�˜é‡�
             E e=list.get(index1);
-            //交换值
+            //äº¤æ�¢å€¼
             list.set(index1, list.get(index2));
             list.set(index2, e);
         }
@@ -172,6 +172,12 @@ public class BookBuilder extends Observable{
         public ArrayList<String> PatronHoldList() {
             return PatronHoldList;
         }
+		@Override
+		public int setCopyNumber(int newCopyNumber) {
+			// TODO Auto-generated method stub
+			copyNumber = newCopyNumber;
+			return copyNumber;
+		}
 
     }
 

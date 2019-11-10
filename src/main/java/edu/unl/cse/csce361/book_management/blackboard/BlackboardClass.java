@@ -48,5 +48,8 @@ public class BlackboardClass extends Observable {
         setChanged();
         notifyObservers(librarian);
     }
+    public void PrintBooksFromCart() {
+    	patron.printBooksInCart();
+    }
 }
 

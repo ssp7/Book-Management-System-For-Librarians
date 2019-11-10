@@ -8,7 +8,7 @@ public class PrintBooksFromCart implements Command{
 	public void execute() {
 		// TODO Auto-generated method stub
 	
-		blackboard.printBooksInCart();
+		blackboard.PrintBooksFromCart();;
 	}
  
 	@Override
