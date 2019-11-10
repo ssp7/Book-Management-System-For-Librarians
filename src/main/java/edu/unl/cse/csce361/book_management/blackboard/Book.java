@@ -1,5 +1,7 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
+import java.util.ArrayList;
+
 public interface Book extends Comparable {
     String getCallNumber();
     String getAuthor();
@@ -11,7 +13,11 @@ public interface Book extends Comparable {
     String setTitle(String title);
     String setSummary(String summary);
     String setCallNumber(String callNumber);
-    int setCopyNumber(int CopyNumber);
-    
-    
+    ArrayList<String>PatronHoldList();
+    void PlacePatronFrontInHoldList(String PatronName);
+    void RemovePatronForeverInHoldList(String Patronname);
+    ArrayList<String>BlackList();
+    void AddPatron(String PatronName);
+    void RemovePatronInHoldList(String PatronName);
+
 }
