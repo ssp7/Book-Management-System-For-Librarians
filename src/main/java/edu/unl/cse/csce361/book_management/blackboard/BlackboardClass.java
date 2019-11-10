@@ -1,51 +1,24 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-import java.util.Observable;
-import java.util.Set;
+import java.util.ArrayList;
 
-    public class BlackboardClass extends Observable {
-	static Librarian librarian = new Librarian();
-    static Patron patron = new Patron();
-/*   
-Read the Author name, Summary of book,
-amount of copies of book from user.
- */
-    public void addBookAsLibrarian() {
-        librarian.addBookAsLibrarian();
-        setChanged();
-        notifyObservers("Author :- "+librarian.addBookAsLibrarian().getAuthor()  + " Title:- " + librarian.addBookAsLibrarian().getTitle() );
+public interface Book extends Comparable {
+    String getCallNumber();
+    String getAuthor();
+    String getTitle();
+    String getStatus();
+    String getSummary();
+    int getCopyNumber();
+    String setAuthor(String author);
+    String setTitle(String title);
+    String setSummary(String summary);
+    String setCallNumber(String callNumber);
+    ArrayList<String>PatronHoldList();
+    void PlacePatronFrontInHoldList(String PatronName);
+    void RemovePatronForeverInHoldList(String Patronname);
+    ArrayList<String>BlackList();
+    void AddPatron(String PatronName);
+    void RemovePatronInHoldList(String PatronName);
 
-    }
-    
-    public static void searchBookbyAuthorOrTitle() {
-      patron.searchBookbyAuthorOrTitle();
-
-    }
-    public  void removeBookAsLibrarian() {
-      Librarian.removeBookAsLibrarian();
-      setChanged();
-      notifyObservers("Author :- " + Librarian.removeBookAsLibrarian().getAuthor() + " Title :- " + librarian.removeBookAsLibrarian().getTitle());
-
-    }
-    
-    public void addBookToCartAsPatron() {
-      patron.addBookToCartAsPatron();
-      setChanged();
-      notifyObservers("A patron added a book to the cart");
-    }
-    
-    public static void printCatalog() {
-      librarian.printCatalog();
-    }
-    public void updateBookInfo() {
-    	librarian.updateBookInfo();
-    	setChanged();
-    	notifyObservers("A book is updated with correct information");
-    	
-    }
-    public void printBooksInCart() {
-    	patron.printBooksInCart();
-    }
-  
 }
 
