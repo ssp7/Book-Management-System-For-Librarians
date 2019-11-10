@@ -55,7 +55,7 @@ public class Librarian implements Observer
      */
     public static void addBookAsLibrarian() {
         Boolean NeedToLoop = true;
-        while (NeedToLoop) {
+        while (NeedToLoop== true) {
             Scanner scan = new Scanner(System.in);
             System.out.println("Please enter Author");
             String author = scan.nextLine();
@@ -64,25 +64,38 @@ public class Librarian implements Observer
             System.out.println("Please enter Summary of the Book");
             String summary = scan.nextLine();
             System.out.println("Please enter amount of copies you want to add");
+            int copyNumber = scan.nextInt();
+            scan.nextLine();
+            System.out.println("Please enter status of the book");
+            String status = scan.nextLine();
+            System.out.println("Pleaes enter call number for the book");
+            String callNumber = scan.nextLine();
+            BookBuilder build = new BookBuilder();
             try {
-                int copyNumber = scan.nextInt();
-                BookBuilder build = new BookBuilder();
+               
+               
                 if (author ==null &&title == null&&summary == null||copyNumber == 0){
                     NeedToLoop = true;
                 }else {
                     NeedToLoop =false;
                 }
-                if (author != null && author.length() > 0) {
+                if (author.length() >= 1) {
                     build.setAuthor(author);
                 }
-                if (title != null && title.length() > 0) {
-                    build.setAuthor(title);
+                if (title.length() >= 1) {
+                    build.setTitle(title);
                 }
-                if (summary != null && summary.length() > 0) {
+                if (summary != null && summary.length() >= 1) {
                     build.setSummary(summary);
                 }
                 if (copyNumber != 0) {
                     build.setCopyNumber(copyNumber);
+                }
+                if(status != null && status.length() >= 1) {
+                	build.setStatus(status);
+                }
+                if(callNumber != null && callNumber.length() >=1) {
+                	build.setCallnumber(callNumber);
                 }
                 Book newBook = build.build();
                 arrBooks.add(newBook);
@@ -90,7 +103,7 @@ public class Librarian implements Observer
                 System.out.println("You did not input the integers, You need to input the integers again");
             }
         }
-        scan.close();
+
     }
 
     public static void removeBookAsLibrarian() {
@@ -104,13 +117,13 @@ public class Librarian implements Observer
     }
     public static void printCatalog() {
         for(int i = 0; i<arrBooks.size();i++) {
-            System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
-            if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
-                System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
+            System.out.println("Book Number :- " + (i-1) + " ----------------------------------------------------------------");
+            System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
             System.out.println("Title :- "+ arrBooks.get(i).getTitle());
             System.out.println("Status :- "+ arrBooks.get(i).getStatus());
             System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
             System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+            System.out.println("Copy number :- " + arrBooks.get(i).getCopyNumber());
         }
     }
 
@@ -135,48 +148,62 @@ it should loop again
                 case 1:
                     System.out.println("Please enter author of the book you want to change ");
                     String authorinput = scan.nextLine();
+                    boolean check = false;
+                    while(check == false) {
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getAuthor().equalsIgnoreCase(authorinput)) {
                             System.out.println("Please enter new author name");
                             String newAuthorName = scan.nextLine();
                             arrBooks.get(b).setAuthor(newAuthorName);
-                        } else {
-                            System.out.println("Please enter correct author name for book");
-                            authorinput = scan.nextLine();
-                            b = 0;
+                            check = true;
                         }
+                      
+                    }
+                    if(check == false) {
+                    System.out.println("Please enter correct author name");
+                    authorinput = scan.nextLine();
+                    }
                     }
                     NeedToLoop =false;
                     break;
                 case 2:
                     System.out.println("Please enter title of the book you would like to change");
                     String titleinput = scan.nextLine();
+                    boolean check2 = false;
+                    while(check2 == false) {
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getTitle().equalsIgnoreCase(titleinput)) {
                             System.out.println("Please enter new title name");
                             String newTitleName = scan.nextLine();
                             arrBooks.get(b).setTitle(newTitleName);
-                        } else {
-                            System.out.println("Please enter correct title for book");
-                            titleinput = scan.nextLine();
-                            b = 0;
+                            check2 = true;
                         }
+                        
+                    }
+                    if(check2 == false) {
+                    System.out.println("Please enter correct title for book");
+                    titleinput = scan.nextLine();
+                    }
                     }
                     NeedToLoop =false;
                     break;
                 case 3:
                     System.out.println("Please enter the call number of the book you would like to change");
                     String callNumberInput = scan.nextLine();
+                    boolean check3 = false;
+                    while(check3 == false) {
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getCallNumber().equalsIgnoreCase(callNumberInput)) {
                             System.out.println("Please enter new title name");
                             String newCallName = scan.nextLine();
                             arrBooks.get(b).setCallNumber(newCallName);
-                        } else {
-                            System.out.println("Please enter correct title for book");
-                            callNumberInput = scan.nextLine();
-                            b = 0;
+                            check3 = true;
                         }
+                    }
+                    if(check3 == false) {
+                    System.out.println("Please enter correct title for book");
+                    callNumberInput = scan.nextLine();
+                    }
                     }
                     break;
                 default:
@@ -184,7 +211,7 @@ it should loop again
 
             }
         }
-        scan.close();
+ 
     }
 
     public void ViewHoldList(){

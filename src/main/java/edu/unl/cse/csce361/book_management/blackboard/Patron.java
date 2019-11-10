@@ -98,8 +98,10 @@ public class Patron implements Observer {
 				  check = true;
 				}
 			}
+			 if(check == false) {
 			System.out.println("Please enter correct author name");
 			authorName = scan.nextLine();
+			 }
 	        }
 			Date today = new Date();
 	        newPatron.setDate(today.getDate());
@@ -116,7 +118,7 @@ public class Patron implements Observer {
 			
 			for(int i = 0; i<booksInCart.size();i++) {
 			
-					System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");	
+					System.out.println("Book Number :- " + (i-1) + " ----------------------------------------------------------------");	
 					System.out.println("Author :- "+ booksInCart.get(i).getAuthor());
 					System.out.println("Title :- "+ booksInCart.get(i).getTitle());
 

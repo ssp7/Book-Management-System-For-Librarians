@@ -55,11 +55,10 @@ public class CLI {
         while (running) {
             for (int i=0; i<commands.size(); i++) {
                 System.out.println(i + ". " + commands.get(i));
-             
             }
             System.out.println("Please enter the number to execute the command");
             int input = scan.nextInt();
-            scan.nextLine();
+      
             commands.get(input).execute();
         }
     }
