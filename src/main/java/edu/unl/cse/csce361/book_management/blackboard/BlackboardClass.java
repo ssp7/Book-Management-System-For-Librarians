@@ -13,7 +13,7 @@ amount of copies of book from user.
     public void addBookAsLibrarian() {
         librarian.addBookAsLibrarian();
         setChanged();
-        notifyObservers("A new book is added to catalog");
+        notifyObservers("Author :- "+librarian.addBookAsLibrarian().getAuthor()  + " Title:- " + librarian.addBookAsLibrarian().getTitle() );
 
     }
     
@@ -22,10 +22,9 @@ amount of copies of book from user.
 
     }
     public  void removeBookAsLibrarian() {
-      librarian.removeBookAsLibrarian();
+      Librarian.removeBookAsLibrarian();
       setChanged();
-
-      notifyObservers("A book has been removed from the catelog");
+      notifyObservers("Author :- " + Librarian.removeBookAsLibrarian().getAuthor() + " Title :- " + librarian.removeBookAsLibrarian().getTitle());
 
     }
     
@@ -44,5 +43,9 @@ amount of copies of book from user.
     	notifyObservers("A book is updated with correct information");
     	
     }
+    public void printBooksInCart() {
+    	patron.printBooksInCart();
+    }
+  
 }
 

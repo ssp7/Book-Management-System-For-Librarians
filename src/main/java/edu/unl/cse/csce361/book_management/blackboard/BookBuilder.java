@@ -4,12 +4,12 @@ import java.util.Observable;
 
 public class BookBuilder extends Observable{
 	
-	private String callnumber;
-	private String title;
-	private String author;
-	private String status;
-	private String summary;
-	private int copyNumber;
+	public String callnumber;
+	public String title;
+	public String author;
+	public String status;
+	public String summary;
+	public int copyNumber;
 	
 	public BookBuilder() {
 		
@@ -63,7 +63,7 @@ public class BookBuilder extends Observable{
 			
 			return callnumber;
 		}
-
+        
 		@Override
 		public String getAuthor() {
 			// TODO Auto-generated method stub
@@ -123,6 +123,13 @@ public class BookBuilder extends Observable{
 			// TODO Auto-generated method stub
 			callnumber = newCallNumber;
 			return callnumber;
+		}
+
+		@Override
+		public int setCopyNumber(int newCopyNumber) {
+			// TODO Auto-generated method stub
+			copyNumber = newCopyNumber;
+			return copyNumber;
 		}
 		
 	}

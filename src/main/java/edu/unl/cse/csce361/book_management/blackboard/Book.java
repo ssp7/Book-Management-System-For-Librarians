@@ -11,6 +11,7 @@ public interface Book extends Comparable {
     String setTitle(String title);
     String setSummary(String summary);
     String setCallNumber(String callNumber);
+    int setCopyNumber(int CopyNumber);
     
     
 }

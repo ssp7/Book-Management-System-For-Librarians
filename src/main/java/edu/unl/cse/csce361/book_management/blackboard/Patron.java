@@ -21,7 +21,7 @@ public class Patron implements Observer {
 		this.bookInCart = bookInCart;
 	    booksInCart.add(this.bookInCart);
 	}
-	public ArrayList<Book> booksInCart;
+	public static ArrayList<Book> booksInCart = new ArrayList<Book>();
 	public ArrayList<Book> booksCheckedOut;
 	public int date;
 	public String getName() {
@@ -88,24 +88,43 @@ public class Patron implements Observer {
 			newPatron.setName(patronName);
 			System.out.println("Please enter the author of the book");
 			String authorName = scan.nextLine();
-	        
+			boolean check = false;
+	        while(check == false) {
 			for(int i = 0; i<arrBooks.size();i++) {
 				if(arrBooks.get(i).getAuthor().equalsIgnoreCase(authorName))
 				{
-					newPatron.setBookInCart(arrBooks.get(i));
-				}
-				else {
-					System.out.println("Please enter correct author name");
-					authorName = scan.nextLine();
-					i = 0;
+				  booksInCart.add(arrBooks.get(i));
+				  arrBooks.get(i).setCopyNumber(arrBooks.get(i).getCopyNumber()-1);
+				  check = true;
 				}
 			}
+			System.out.println("Please enter correct author name");
+			authorName = scan.nextLine();
+	        }
 			Date today = new Date();
 	        newPatron.setDate(today.getDate());
 	        
 	      arrPatron.add(newPatron);
+	      
 	        
 	    }
+	  
+	 
+		public static void printBooksInCart() {
+			 
+			System.out.println("Here is the list of books in your cart sir");
+			
+			for(int i = 0; i<booksInCart.size();i++) {
+			
+					System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");	
+					System.out.println("Author :- "+ booksInCart.get(i).getAuthor());
+					System.out.println("Title :- "+ booksInCart.get(i).getTitle());
+
+					System.out.println("CallNumber :- " + booksInCart.get(i).getCallNumber());
+					System.out.println("Summary :-"+booksInCart.get(i).getSummary());
+				}
+			
+		}
 
 	    private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
 	        System.out.println("Author :- "+ AuthorName);
@@ -179,6 +198,5 @@ public class Patron implements Observer {
 	            }
 	        return NeedToLoop;
 	    }
-	    
-	    
+	   
 }

@@ -10,7 +10,7 @@ public class Librarian implements Observer
 {
 
 	public String name;
-	public Book book;
+	public static Book book;
 	public ArrayList<Book> arrayBook;
 	static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
 	static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
@@ -51,7 +51,7 @@ public class Librarian implements Observer
 	Read the Author name, Summary of book,
 	amount of copies of book from user.
 	 */
-	public void addBookAsLibrarian() {
+	public Book addBookAsLibrarian() {
 		Boolean NeedToLoop = true;
 
 		while (NeedToLoop) {
@@ -82,24 +82,29 @@ public class Librarian implements Observer
 					build.setCopyNumber(copyNumber);
 					NeedToLoop = false;
 				}
-				Book newBook = build.build();
-				arrBooks.add(newBook);
+				book = build.build();
+				
+				arrBooks.add(book);
+			
 
 			} catch (Exception e) {
 				System.out.println("You did not input the integers, You need to input the integers again");
 			}
 		}
+		return book;
 
 	}
 
-	public static void removeBookAsLibrarian() {
+	public static Book removeBookAsLibrarian() {
 		System.out.println("Please enter catalog number of the book you want to remove");
 		String catalogNumber = scan.nextLine();
 		for(int i = 0; i<arrBooks.size(); i++) {
 			if(arrBooks.get(i).getCallNumber().equalsIgnoreCase(catalogNumber)) {
 				arrBooks.remove(i);
+			   book = arrBooks.get(i);
 			}
 		}
+		return book;
 	}
 	public static void printCatalog() {
 		Collections.sort(arrBooks);

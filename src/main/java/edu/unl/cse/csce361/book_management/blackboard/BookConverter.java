@@ -14,7 +14,7 @@ public class BookConverter {
 			 
 			for( Map<String,String> mapping : csvSet) {
 				 BookBuilder builder = new BookBuilder();
-				if(mapping.get("Author") != null && mapping.get("Author").length() >= 1) {
+				if(mapping.get("Author") != null && mapping.get("Author").length() >=1) {
 					
 					builder.setAuthor(mapping.get("Author"));
 				}
@@ -30,14 +30,22 @@ public class BookConverter {
 				if(mapping.get("Summary") != null && mapping.get("Summary").length() >= 1) {
 					builder.setSummary(mapping.get("Summary"));
 				}
+				String copynumber = mapping.get("Copynumber");
+				
+				if(copynumber != null && copynumber.length() > 0) {
+					builder.setCopyNumber(Integer.parseInt(copynumber));
+				}
+					
 				 
 				 Book b = builder.build();
+				 System.out.println(b.getCopyNumber());
 				   arrBooks.add(b); 
 				 
 			}
 			  
 		return arrBooks;
 	}
+	
 public static void main(String []args) {
 	
 	bookConvert("books.csv");
