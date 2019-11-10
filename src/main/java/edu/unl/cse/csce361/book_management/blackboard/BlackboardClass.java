@@ -1,24 +1,52 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Set;
 
-public interface Book extends Comparable {
-    String getCallNumber();
-    String getAuthor();
-    String getTitle();
-    String getStatus();
-    String getSummary();
-    int getCopyNumber();
-    String setAuthor(String author);
-    String setTitle(String title);
-    String setSummary(String summary);
-    String setCallNumber(String callNumber);
-    ArrayList<String>PatronHoldList();
-    void PlacePatronFrontInHoldList(String PatronName);
-    void RemovePatronForeverInHoldList(String Patronname);
-    ArrayList<String>BlackList();
-    void AddPatron(String PatronName);
-    void RemovePatronInHoldList(String PatronName);
+public class BlackboardClass extends Observable {
+    static Librarian librarian = new Librarian();
+    static Patron patron = new Patron();
+    /*
+    Read the Author name, Summary of book,
+    amount of copies of book from user.
+     */
+    public void addBookAsLibrarian() {
+        librarian.addBookAsLibrarian();
+        setChanged();
+        notifyObservers(patron);
+    }
+    public static void searchBookbyAuthorOrTitle() {
+        patron.searchBookbyAuthorOrTitle();
+    }
+    public  void removeBookAsLibrarian() {
+        librarian.removeBookAsLibrarian();
+        setChanged();
+        notifyObservers();
+    }
+    public void addBookToCartAsPatron() {
+        patron.addBookToCartAsPatron();
+        setChanged();
+        notifyObservers(librarian);
 
+    }
+    public static void printCatalog() {
+        librarian.printCatalog();
+    }
+    public void updateBookInfo() {
+        librarian.updateBookInfo();
+        setChanged();
+        notifyObservers(patron);
+    }
+
+    public void ViewHoldList(){
+        librarian.ViewHoldList();
+        setChanged();
+        notifyObservers(librarian);
+    }
+    public void manipulateHoldList(){
+        librarian.manipulateHoldList();
+        setChanged();
+        notifyObservers(librarian);
+    }
 }
 
