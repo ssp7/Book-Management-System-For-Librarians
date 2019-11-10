@@ -1,190 +1,192 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-        import java.util.ArrayList;
-        import java.util.Observable;
-        import java.util.Observer;
-        import java.util.Scanner;
-        import java.time.format.DateTimeFormatter;
-        import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Scanner;
 
-public class Patron implements Observer {
+public class Librarian implements Observer
+{
 
-    /*
-    This part for all parameters
-     */
+    public String name;
+    public Book book;
+    public ArrayList<Book> arrayBook;
     static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
     static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
     static Scanner scan = new Scanner(System.in);
     static Librarian librarian = new Librarian();
-    public String name;
-    public Book bookInCart;
-    static ArrayList<Book> booksInCart;
-    public ArrayList<Book> booksCheckedOut;
-    public String date;
 
+    public String getName() {
+        return name;
+    }
 
-    /*
-    This part for all get method and set method
-     */
-    public void AddBookIntoCart(Book bookInCart) {
-        booksInCart.add(bookInCart);
-    }
-    public  void  CartSetup(){
-        booksInCart =new ArrayList<>();
-    }
     public void setName(String name) {
         this.name = name;
     }
-    public void setDate(String date) {
-        this.date = date;
+
+    public Book getBook() {
+        return book;
     }
 
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
+    public ArrayList<Book> getArrayBook() {
+        return arrayBook;
+    }
+
+    public void setArrayBook(ArrayList<Book> arrayBook) {
+        this.arrayBook = arrayBook;
+    }
 
     @Override
-    public void update(Observable b, Object Books) {
-        System.out.println("New book is added to a catalog");
+    public void update(Observable o, Object arg) {
+        // TODO Auto-generated method stub
+
+
     }
-
-
     /*
-    This part for search book for author or book title
-    if the title or author name can not be found in
-    database, it will loop again
+    Read the Author name, Summary of book,
+    amount of copies of book from user.if
+    the user input null for author,title,summary
+    or copyNumber to 0, it will output you should
+    input again
      */
-    public static void searchBookbyAuthorOrTitle() {
-        System.out.println("If you like to search by author then press 1 or If you like to search by title press 2");
-        int search = scan.nextInt();
-        scan.nextLine();
+    public static void addBookAsLibrarian() {
         Boolean NeedToLoop = true;
         while (NeedToLoop) {
-            if (search == 1) {
-                System.out.println("Please enter the author name");
-                String authorName = scan.nextLine();
-                NeedToLoop = CheckValidityInput(authorName);
-                if (NeedToLoop){
-                    System.out.println("You input is invalid which can not match in the author name of database");
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Please enter Author");
+            String author = scan.nextLine();
+            System.out.println("Please enter Title of the Book");
+            String title = scan.nextLine();
+            System.out.println("Please enter Summary of the Book");
+            String summary = scan.nextLine();
+            System.out.println("Please enter amount of copies you want to add");
+            try {
+                int copyNumber = scan.nextInt();
+                BookBuilder build = new BookBuilder();
+                if (author ==null &&title == null&&summary == null||copyNumber == 0){
+                    NeedToLoop = true;
+                }else {
+                    NeedToLoop =false;
                 }
-                Loop(authorName, "author_name");
-            } else if (search == 2) {
-                System.out.println("Please enter the title of the book");
-                String titleName = scan.nextLine();
-                NeedToLoop = CheckValidityInput(titleName);
-                if (NeedToLoop){
-                    System.out.println("You input is invalid which can not match in the titleName of database");
+                if (author != null && author.length() > 0) {
+                    build.setAuthor(author);
                 }
-                Loop(titleName, "Title");
+                if (title != null && title.length() > 0) {
+                    build.setAuthor(title);
+                }
+                if (summary != null && summary.length() > 0) {
+                    build.setSummary(summary);
+                }
+                if (copyNumber != 0) {
+                    build.setCopyNumber(copyNumber);
+                }
+                Book newBook = build.build();
+                arrBooks.add(newBook);
+            } catch (Exception e) {
+                System.out.println("You did not input the integers, You need to input the integers again");
             }
         }
-
-
+        scan.close();
     }
 
-    /*
-    This part is for adding the book to cart as a
-    patron, if the author name can not be found in
-    database,it can be loop again
-     */
-    public static void addBookToCartAsPatron() {
+    public static void removeBookAsLibrarian() {
+        System.out.println("Please enter catalog number of the book you want to remove");
+        String catalogNumber = scan.nextLine();
+        for(int i = 0; i<arrBooks.size(); i++) {
+            if(arrBooks.get(i).getCallNumber().equalsIgnoreCase(catalogNumber)) {
+                arrBooks.remove(i);
+            }
+        }
+    }
+    public static void printCatalog() {
+        for(int i = 0; i<arrBooks.size();i++) {
+            System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
+            if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
+                System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
+            System.out.println("Title :- "+ arrBooks.get(i).getTitle());
+            System.out.println("Status :- "+ arrBooks.get(i).getStatus());
+            System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
+            System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+        }
+    }
 
-        Patron newPatron = new Patron();
-        System.out.println("Please enter your Name");
-        String patronName = scan.nextLine();
-        newPatron.setName(patronName);
-        System.out.println("Please enter the author of the book");
-        String authorName = scan.nextLine();
+
+/*
+This part is for Updating the bookInfo
+Change the author name
+change the title of book
+change the call number of the book
+if the user input the invalid values,
+it should loop again
+ */
+    public static void updateBookInfo() {
         Boolean NeedToLoop = true;
         while (NeedToLoop) {
-            for (int i = 0; i < arrBooks.size(); i++) {
-                if (arrBooks.get(i).getAuthor().equalsIgnoreCase(authorName)) {
-                    newPatron.CartSetup();
-                    newPatron.AddBookIntoCart(arrBooks.get(i));
-                    NeedToLoop = false;
-                }
-            }
-            if (NeedToLoop == true){
-                System.out.println("Please enter correct author name");
-            }
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            newPatron.setDate(dtf.format(now));
-            arrPatron.add(newPatron);
-        }
-    }
-
-
-    private static void Prompt(String AuthorName, String TitleName, String Status, String Summary){
-        System.out.println("Author :- "+ AuthorName);
-        System.out.println("Title :- "+ TitleName);
-        System.out.println("Status :- "+Status);
-        System.out.println("Summary :-"+Summary);
-    }
-
-    private static void Loop(String string,String Type){
-        switch (Type){
-	                /*This part only check for title,
-	                This contains when the status is missing or not,
-	                when the status is missing, it will shows that it will be
-	                available later
-	                */
-
-            case "Title":
-                for (Book book:arrBooks
-                ) {
-                    if (book.getTitle().equalsIgnoreCase(string)){
-                        if (book.getStatus().equalsIgnoreCase("Missing")){
-                            Prompt(book.getAuthor(),book.getTitle(),"Will be available later1",book.getSummary());
-                        }
-                        else {
-                            Prompt(book.getAuthor(),book.getTitle(),book.getStatus(),book.getSummary());
-                        }
-
-                    }
-                }
-                break;
-	                /*This part only check for author_name,
-	                This contains when the status is missing or not,
-	                when the status is missing, it will shows that it will be
-	                available later
-	                */
-            case "author_name":
-                for (Book book:arrBooks
-                ) {
-                    if (book.getAuthor().equalsIgnoreCase(string)){
-                        if (book.getStatus().equalsIgnoreCase("Missing")){
-
-                        }else {
-                            Prompt(book.getAuthor(),book.getTitle(),book.getStatus(),book.getSummary());
+            System.out.println("Please enter 1 to change author name of the book");
+            System.out.println("Please enter 2 to change the Title of book");
+            System.out.println("Please enter 3 to change the call number of the book");
+            int input = scan.nextInt();
+            scan.nextLine();
+            switch (input) {
+                case 1:
+                    System.out.println("Please enter author of the book you want to change ");
+                    String authorinput = scan.nextLine();
+                    for (int b = 0; b < arrBooks.size(); b++) {
+                        if (arrBooks.get(b).getAuthor().equalsIgnoreCase(authorinput)) {
+                            System.out.println("Please enter new author name");
+                            String newAuthorName = scan.nextLine();
+                            arrBooks.get(b).setAuthor(newAuthorName);
+                        } else {
+                            System.out.println("Please enter correct author name for book");
+                            authorinput = scan.nextLine();
+                            b = 0;
                         }
                     }
-                }
-                break;
-	                /*
-	                This part shows that the invalid input
-	                 */
-        }
-    }
+                    NeedToLoop =false;
+                    break;
+                case 2:
+                    System.out.println("Please enter title of the book you would like to change");
+                    String titleinput = scan.nextLine();
+                    for (int b = 0; b < arrBooks.size(); b++) {
+                        if (arrBooks.get(b).getTitle().equalsIgnoreCase(titleinput)) {
+                            System.out.println("Please enter new title name");
+                            String newTitleName = scan.nextLine();
+                            arrBooks.get(b).setTitle(newTitleName);
+                        } else {
+                            System.out.println("Please enter correct title for book");
+                            titleinput = scan.nextLine();
+                            b = 0;
+                        }
+                    }
+                    NeedToLoop =false;
+                    break;
+                case 3:
+                    System.out.println("Please enter the call number of the book you would like to change");
+                    String callNumberInput = scan.nextLine();
+                    for (int b = 0; b < arrBooks.size(); b++) {
+                        if (arrBooks.get(b).getCallNumber().equalsIgnoreCase(callNumberInput)) {
+                            System.out.println("Please enter new title name");
+                            String newCallName = scan.nextLine();
+                            arrBooks.get(b).setCallNumber(newCallName);
+                        } else {
+                            System.out.println("Please enter correct title for book");
+                            callNumberInput = scan.nextLine();
+                            b = 0;
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid input, you need to input the valid values, please input again");
 
-
-
-    /*
-    When the author name does not exist in database,
-    it will return True ,which will result to loop again
-    else,it will return false,which will result to no
-    loop again
-     */
-    public static Boolean CheckValidityInput(String string){
-        Boolean NeedToLoop= true;
-        for (Book book:arrBooks
-        ) {
-            if (book.getAuthor().equalsIgnoreCase(string)){
-                NeedToLoop =false;
-            }else if (book.getTitle().equalsIgnoreCase(string)){
-                NeedToLoop =false;
             }
         }
-        return NeedToLoop;
+        scan.close();
     }
+
     public void ViewHoldList(){
         scan = new Scanner(System.in);
         System.out.println("What is the book title that you want to search?");
@@ -192,7 +194,7 @@ public class Patron implements Observer {
         System.out.println(arrBooks.get(0).PatronHoldList());
 
         for (Book book:arrBooks
-        ) {
+             ) {
             if (book.getTitle().equals(InputTitle)){
                 System.out.println("The hold list is that: ");
                 System.out.println(book.PatronHoldList());
@@ -200,38 +202,37 @@ public class Patron implements Observer {
 
         }
     }
-    public static void printBooksInCart() {
-
-        System.out.println("Here is the list of books in your cart sir");
-
-        for(int i = 0; i<booksInCart.size();i++) {
-
-            System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
-            System.out.println("Author :- "+ booksInCart.get(i).getAuthor());
-            System.out.println("Title :- "+ booksInCart.get(i).getTitle());
-
-            System.out.println("CallNumber :- " + booksInCart.get(i).getCallNumber());
-            System.out.println("Summary :-"+booksInCart.get(i).getSummary());
-        }
-
-    }
-
-    public static void PlaceBookOnHoldAsPatron(){
-        System.out.println("Please input your name");
+//Manipulate hold list
+    public void manipulateHoldList(){
+        System.out.println("How do you want to manipulate the hold list? Type 1 for remove people so that he will no longer have a hold on the book. 2 for place people at the front of the queue, 3 for add patron into holdList,4 for delete patron in holdList");
+        int UserInput = scan.nextInt();
+        System.out.println("Please input the patron Name");
         Scanner scanner2 =new Scanner(System.in);
         String PatronName = scanner2.nextLine();
         System.out.println("Please input the Book Title");
         String BookTitle = scanner2.nextLine();
         for (Book book:arrBooks
-        ) {
+             ) {
             if (book.getTitle().equals(BookTitle)) {
-                 book.AddPatron(PatronName);
+                switch (UserInput) {
+                    case 1:
+                        book.RemovePatronForeverInHoldList(PatronName);
                         break;
+                    case 2:
+                        book.PlacePatronFrontInHoldList(PatronName);
+                        break;
+                    case 3:
+                        book.AddPatron(PatronName);
+                        break;
+                    case 4:
+                        book.RemovePatronInHoldList(PatronName);
+                        break;
+
+                }
             }
 
         }
 
     }
 }
-
 
