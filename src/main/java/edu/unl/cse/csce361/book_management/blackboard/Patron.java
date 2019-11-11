@@ -1,11 +1,11 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
-        import java.util.ArrayList;
-        import java.util.Observable;
-        import java.util.Observer;
-        import java.util.Scanner;
-        import java.time.format.DateTimeFormatter;
         import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Scanner;
 
 public class Patron implements Observer {
 

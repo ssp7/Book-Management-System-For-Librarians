@@ -1,5 +1,9 @@
 package edu.unl.cse.csce361.book_management;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.AddBookToCartAsPatron;
 import edu.unl.cse.csce361.book_management.commands.Command;
@@ -16,16 +20,6 @@ import edu.unl.cse.csce361.book_management.commands.SetDateCommand;
 import edu.unl.cse.csce361.book_management.commands.UpdateBookInfoAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.ViewHoldList;
 import edu.unl.cse.csce361.book_management.commands.manipulateHoldList;
-
-import java.awt.Graphics;
-import java.awt.Shape;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import javax.swing.text.BadLocationException;
-import javax.swing.text.View;
-import javax.swing.text.Position.Bias;
 
 public class CLI {
     private List<Command> commands;

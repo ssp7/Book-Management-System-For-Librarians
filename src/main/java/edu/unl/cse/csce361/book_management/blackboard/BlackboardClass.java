@@ -1,7 +1,6 @@
 package edu.unl.cse.csce361.book_management.blackboard;
 
 import java.util.Observable;
-import java.util.Set;
 
 public class BlackboardClass extends Observable {
     static Librarian librarian = new Librarian();
@@ -11,34 +10,34 @@ public class BlackboardClass extends Observable {
     amount of copies of book from user.
      */
     public void addBookAsLibrarian() {
-        librarian.addBookAsLibrarian();
+        Librarian.addBookAsLibrarian();
         setChanged();
         notifyObservers(patron);
     }
     public static void searchBookbyAuthorOrTitle() {
-        patron.searchBookbyAuthorOrTitle();
+        Patron.searchBookbyAuthorOrTitle();
     }
     public  void removeBookAsLibrarian() {
-        librarian.removeBookAsLibrarian();
+        Librarian.removeBookAsLibrarian();
         setChanged();
         notifyObservers();
     }
     public void addBookToCartAsPatron() {
-        patron.addBookToCartAsPatron();
+        Patron.addBookToCartAsPatron();
         setChanged();
         notifyObservers(librarian);
 
     }
     public static void printCatalog() {
-        librarian.printCatalog();
+        Librarian.printCatalog();
     }
     public void updateBookInfo() {
-        librarian.updateBookInfo();
+        Librarian.updateBookInfo();
         setChanged();
         notifyObservers(patron);
     }
     public void PlaceBooksOnHoldAsPatron() {
-    	patron.PlaceBookOnHoldAsPatron();
+    	Patron.PlaceBookOnHoldAsPatron();
     	setChanged();
     	notifyObservers(librarian);
     }
@@ -53,10 +52,10 @@ public class BlackboardClass extends Observable {
         notifyObservers(librarian);
     }
     public void PrintBooksFromCart() {
-    	patron.printBooksInCart();
+    	Patron.printBooksInCart();
     }
     public void PrintPatronInfo() {
-    	patron.PrintPatronInfo();
+    	Patron.PrintPatronInfo();
     }
     
     public void PrintAllPatronsInfo() {
