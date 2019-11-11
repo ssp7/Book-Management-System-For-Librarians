@@ -2,8 +2,10 @@ package edu.unl.cse.csce361.book_management.Test;
 
 import edu.unl.cse.csce361.book_management.CLI;
 import edu.unl.cse.csce361.book_management.blackboard.Book;
+import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.Command;
 import edu.unl.cse.csce361.book_management.commands.ExitCommand;
+import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -68,4 +70,9 @@ public class TestCases {
 	   
    }
     
-}
+   @Test(timeout = 1000)
+   public void printBook() {
+	   Command c = new PrintCatalog();
+	   c.execute();
+	   }
+   }
