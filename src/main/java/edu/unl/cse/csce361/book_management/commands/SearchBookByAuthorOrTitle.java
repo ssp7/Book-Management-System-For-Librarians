@@ -8,7 +8,7 @@ public class SearchBookByAuthorOrTitle implements Command{
 	public void execute() {
 		// TODO Auto-generated method stub
 		
-		blackboard.searchBookbyAuthorOrTitle();
+		BlackboardClass.searchBookbyAuthorOrTitle();
 	}
    
 	@Override

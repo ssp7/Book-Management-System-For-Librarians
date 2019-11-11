@@ -1,26 +1,18 @@
 package edu.unl.cse.csce361.book_management.Test;
 
-import edu.unl.cse.csce361.book_management.CLI;
-import edu.unl.cse.csce361.book_management.blackboard.Book;
-import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
-import edu.unl.cse.csce361.book_management.commands.Command;
-import edu.unl.cse.csce361.book_management.commands.ExitCommand;
-import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
-
-import javax.sql.rowset.CachedRowSet;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.unl.cse.csce361.book_management.CLI;
+import edu.unl.cse.csce361.book_management.commands.Command;
+import edu.unl.cse.csce361.book_management.commands.ExitCommand;
+import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
 
 public class TestCases {
     private InputStream in;
