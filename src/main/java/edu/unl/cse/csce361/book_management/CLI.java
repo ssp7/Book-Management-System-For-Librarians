@@ -4,8 +4,11 @@ import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.AddBookToCartAsPatron;
 import edu.unl.cse.csce361.book_management.commands.Command;
 import edu.unl.cse.csce361.book_management.commands.ExitCommand;
+import edu.unl.cse.csce361.book_management.commands.PrintAllPatronInfo;
 import edu.unl.cse.csce361.book_management.commands.PrintBooksFromCart;
 import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
+import edu.unl.cse.csce361.book_management.commands.PrintPatronInfo;
+import edu.unl.cse.csce361.book_management.commands.PrintSpecificPatronInfo;
 import edu.unl.cse.csce361.book_management.commands.RemoveBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.SearchBookByAuthorOrTitle;
 import edu.unl.cse.csce361.book_management.commands.SetDateCommand;
@@ -48,6 +51,9 @@ public class CLI {
         addCommand(new PrintCatalog());
         addCommand(new UpdateBookInfoAsLibrarian());
         addCommand(new PrintBooksFromCart());
+        addCommand(new PrintAllPatronInfo());
+        addCommand(new PrintSpecificPatronInfo());
+        addCommand(new PrintPatronInfo());
         
     }
 

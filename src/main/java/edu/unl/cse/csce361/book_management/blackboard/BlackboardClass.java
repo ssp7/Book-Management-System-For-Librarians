@@ -51,5 +51,15 @@ public class BlackboardClass extends Observable {
     public void PrintBooksFromCart() {
     	patron.printBooksInCart();
     }
+    public void PrintPatronInfo() {
+    	patron.PrintPatronInfo();
+    }
+    
+    public void PrintAllPatronsInfo() {
+    	librarian.printPatrons();
+    }
+    public void PrintSpecificPatronInfo() {
+    	librarian.printSpecificPatronInfo();
+    }
 }
 

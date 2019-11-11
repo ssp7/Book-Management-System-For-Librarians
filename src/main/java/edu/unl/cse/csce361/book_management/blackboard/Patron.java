@@ -38,10 +38,37 @@ public class Patron implements Observer {
     public void setDate(String date) {
         this.date = date;
     }
+ 
 
 
-
-    @Override
+    public static ArrayList<Book> getArrBooks() {
+		return arrBooks;
+	}
+	public static ArrayList<Patron> getArrPatron() {
+		return arrPatron;
+	}
+	public static Scanner getScan() {
+		return scan;
+	}
+	public static Librarian getLibrarian() {
+		return librarian;
+	}
+	public String getName() {
+		return name;
+	}
+	public Book getBookInCart() {
+		return bookInCart;
+	}
+	public static ArrayList<Book> getBooksInCart() {
+		return booksInCart;
+	}
+	public ArrayList<Book> getBooksCheckedOut() {
+		return booksCheckedOut;
+	}
+	public String getDate() {
+		return date;
+	}
+	@Override
     public void update(Observable b, Object Books) {
         System.out.println("New book is added to a catalog");
     }
@@ -231,5 +258,23 @@ public class Patron implements Observer {
 
         }
 
+    }
+    public static void PrintPatronInfo() {
+    	System.out.println("Please enter your name");
+    	String patronName = scan.nextLine();
+    	boolean check = false;
+    	while(check == false) {
+    	for(int i =0 ; i< arrPatron.size(); i++) {
+    		if(arrPatron.get(i).getName().equalsIgnoreCase(patronName)) {
+    			System.out.println(" Your Name :- " + patronName);
+                System.out.println("Books that you've checked out in cart " + arrPatron.get(i).getBooksCheckedOut());
+                check = true;
+    		}
+    	}
+    	if(check == false) {
+    	   System.out.println("Please enter correct name");
+    	   patronName = scan.nextLine();
+    	}
+    }
     }
 }

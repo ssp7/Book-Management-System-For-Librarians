@@ -202,6 +202,37 @@ it should loop again
 
         }
     }
+    public void printPatrons() {
+    	ArrayList<Patron> patrons = Patron.getArrPatron();
+    	
+    	for(int i = 0; i < patrons.size() ;i ++) {
+    		System.out.println(" Patron No :- " + (i-1) + "---------------");
+    		System.out.println("Name of the Patron :- "+patrons.get(i).getName());
+    		System.out.println("Books in the Patron's cart :- " + patrons.get(i).getBooksInCart());
+    	}
+    }
+    
+    public void printSpecificPatronInfo() {
+    	
+    	System.out.println("Please enter patron's name");
+    	String patronName = scan.nextLine();
+    	boolean check = false;
+    	while(check == false) {
+    	for(int i =0 ; i< arrPatron.size(); i++) {
+    		if(arrPatron.get(i).getName().equalsIgnoreCase(patronName)) {
+    			System.out.println(" Patron's Name :- " + patronName);
+                System.out.println("Books that patron has checked out in cart " + arrPatron.get(i).getBooksCheckedOut());
+                System.out.println("Books in patron's cart :- " + arrPatron.get(i).getBooksInCart());
+                check = true;
+    		}
+    	}
+    	if(check == false) {
+    	   System.out.println("Please enter correct patron's name");
+    	   patronName = scan.nextLine();
+    	}
+    }
+    
+    }
 //Manipulate hold list
     public void manipulateHoldList(){
         System.out.println("How do you want to manipulate the hold list? Type 1 for remove people so that he will no longer have a hold on the book. 2 for place people at the front of the queue, 3 for add patron into holdList,4 for delete patron in holdList");
