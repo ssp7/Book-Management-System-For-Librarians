@@ -2,7 +2,7 @@
  * CSV Reader/Writer, copyright (c) 2019 Christopher A. Bohn, bohn@unl.edu.
  */
 
-package edu.unl.cse.csce361.course_registration.backend;
+package edu.unl.cse.csce361.book_management.blackboard;
 
 import java.io.*;
 import java.net.URL;
@@ -97,9 +97,10 @@ public class CSVReaderWriter {
 
 /*
     public static void main(String[] args) {
-        Set<Map<String, String>> demo = readCSV("demo.csv");
+        Set<Map<String, String>> demo = readCSV("books.csv");
         boolean success = writeCSV("out.csv", demo);
+        System.out.println(demo);
         System.out.println(success ? "Wrote file!" : "Didn't write file");
     }
-*/
+    */
 }
