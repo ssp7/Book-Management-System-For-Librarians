@@ -16,11 +16,11 @@ public class BookConverter {
         ArrayList<Book> arrBooks = new ArrayList<Book>();
 
         Set<Map<String, String>> csvSet = CSVReaderWriter.readCSV(filename);
-        
-        
+
+
 /*
 convert all contents in csv file
-into arraylist for containing Book 
+into arraylist for containing Book
 Type
  */
         for( Map<String,String> mapping : csvSet) {
@@ -43,7 +43,23 @@ Type
      */
     public static void CheckingValidtyOfCSV(Map<String,String> mapping,BookBuilder builder,String Type){
         if(mapping.get(Type) != null && mapping.get(Type).length() >= 1) {
-            builder.setAuthor(mapping.get(Type));
+            switch (Type){
+                case "Author":
+                    builder.setAuthor(mapping.get(Type));
+                    break;
+                case "Status":
+                    builder.setStatus(mapping.get(Type));
+                    break;
+                case "Title":
+                    builder.setTitle(mapping.get(Type));
+                    break;
+                case "CallNumber":
+                    builder.setCallnumber(mapping.get(Type));
+                    break;
+                case "Summary":
+                    builder.setSummary(mapping.get(Type));
+                    break;
+            }
         }
         
     }
@@ -52,4 +68,5 @@ Type
     }
 
 }
+
 
