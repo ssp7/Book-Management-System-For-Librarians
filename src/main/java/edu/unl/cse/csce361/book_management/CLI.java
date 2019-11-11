@@ -68,7 +68,7 @@ public class CLI {
         addCommand(new PlaceBooksOnHoldAsPatron());
     }
 
-    private void run() {
+    public void run() {
         while (running) {
             for (int i=0; i<commands.size(); i++) {
                 System.out.println(i + ". " + commands.get(i));
