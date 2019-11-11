@@ -78,6 +78,7 @@ public class CLI {
       
             commands.get(input).execute();
         }
+
     }
 
     public static void main(String[] args) {

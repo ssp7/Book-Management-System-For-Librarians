@@ -1,6 +1,9 @@
 package edu.unl.cse.csce361.book_management.Test;
 
 import edu.unl.cse.csce361.book_management.CLI;
+import edu.unl.cse.csce361.book_management.blackboard.Book;
+import edu.unl.cse.csce361.book_management.commands.Command;
+import edu.unl.cse.csce361.book_management.commands.ExitCommand;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -56,15 +59,13 @@ public class TestCases {
         System.setOut(out);
         System.setErr(err);
     }
-    @Test(timeout = 1000)
-    public void Exit() {
-    	setFakeIn("0");
-    	cli.run();
-    	
-    }
-    @Test
-    public void addBook() {
-    	
-    }
+
+   @Test
+   public void Exit() {
+	   Command c = new ExitCommand(cli);
+	  
+	    c.execute();
+	   
+   }
     
 }
