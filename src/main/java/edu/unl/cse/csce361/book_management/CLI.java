@@ -4,6 +4,7 @@ import edu.unl.cse.csce361.book_management.commands.AddBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.AddBookToCartAsPatron;
 import edu.unl.cse.csce361.book_management.commands.Command;
 import edu.unl.cse.csce361.book_management.commands.ExitCommand;
+import edu.unl.cse.csce361.book_management.commands.PlaceBooksOnHoldAsPatron;
 import edu.unl.cse.csce361.book_management.commands.PrintAllPatronInfo;
 import edu.unl.cse.csce361.book_management.commands.PrintBooksFromCart;
 import edu.unl.cse.csce361.book_management.commands.PrintCatalog;
@@ -64,7 +65,7 @@ public class CLI {
         addCommand(new PrintPatronInfo());
         addCommand(new ViewHoldList());
         addCommand(new manipulateHoldList());
-      
+        addCommand(new PlaceBooksOnHoldAsPatron());
     }
 
     private void run() {

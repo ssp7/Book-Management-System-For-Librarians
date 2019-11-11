@@ -37,7 +37,11 @@ public class BlackboardClass extends Observable {
         setChanged();
         notifyObservers(patron);
     }
-
+    public void PlaceBooksOnHoldAsPatron() {
+    	patron.PlaceBookOnHoldAsPatron();
+    	setChanged();
+    	notifyObservers(librarian);
+    }
     public void ViewHoldList(){
         librarian.ViewHoldList();
         setChanged();
@@ -61,5 +65,6 @@ public class BlackboardClass extends Observable {
     public void PrintSpecificPatronInfo() {
     	librarian.printSpecificPatronInfo();
     }
+  
 }
 
