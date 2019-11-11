@@ -64,8 +64,14 @@ public class Librarian implements Observer
             System.out.println("Please enter Summary of the Book");
             String summary = scan.nextLine();
             System.out.println("Please enter amount of copies you want to add");
+            int copyNumber = scan.nextInt();
+            scan.nextLine();
+            System.out.println("Please enter status of the book");
+            String status = scan.nextLine();
+            System.out.println("Please enter call number of the book");
+            String callNumber = scan.nextLine();
             try {
-                int copyNumber = scan.nextInt();
+                
                 BookBuilder build = new BookBuilder();
                 if (author ==null &&title == null&&summary == null||copyNumber == 0){
                     NeedToLoop = true;
@@ -76,7 +82,7 @@ public class Librarian implements Observer
                     build.setAuthor(author);
                 }
                 if (title != null && title.length() > 0) {
-                    build.setAuthor(title);
+                    build.setTitle(title);
                 }
                 if (summary != null && summary.length() > 0) {
                     build.setSummary(summary);
@@ -84,13 +90,19 @@ public class Librarian implements Observer
                 if (copyNumber != 0) {
                     build.setCopyNumber(copyNumber);
                 }
+                if( status != null && status.length() >0) {
+                	build.setStatus(status);
+                }
+                if(callNumber != null && callNumber.length()>0) {
+                	build.setCallnumber(callNumber);
+                }
                 Book newBook = build.build();
                 arrBooks.add(newBook);
             } catch (Exception e) {
                 System.out.println("You did not input the integers, You need to input the integers again");
             }
         }
-        scan.close();
+
     }
 
     public static void removeBookAsLibrarian() {
@@ -104,13 +116,14 @@ public class Librarian implements Observer
     }
     public static void printCatalog() {
         for(int i = 0; i<arrBooks.size();i++) {
-            System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
-            if(arrBooks.get(i).getStatus().equalsIgnoreCase("Shelved"))
-                System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
+            System.out.println("Book Number :- " + (i+1) + " ----------------------------------------------------------------");
+            if(!arrBooks.get(i).getStatus().equalsIgnoreCase("Missing"))
+            System.out.println("Author :- "+ arrBooks.get(i).getAuthor());
             System.out.println("Title :- "+ arrBooks.get(i).getTitle());
             System.out.println("Status :- "+ arrBooks.get(i).getStatus());
             System.out.println("CallNumber :- " + arrBooks.get(i).getCallNumber());
             System.out.println("Summary :-"+arrBooks.get(i).getSummary());
+            System.out.println("CopyNumber :- " + arrBooks.get(i).getCopyNumber());
         }
     }
 
@@ -132,7 +145,7 @@ it should loop again
             int input = scan.nextInt();
             scan.nextLine();
             switch (input) {
-                case 1:
+                case 1: 
                     System.out.println("Please enter author of the book you want to change ");
                     String authorinput = scan.nextLine();
                     for (int b = 0; b < arrBooks.size(); b++) {
@@ -184,7 +197,7 @@ it should loop again
 
             }
         }
-        scan.close();
+
     }
 
     public void ViewHoldList(){
@@ -208,7 +221,7 @@ it should loop again
     	for(int i = 0; i < patrons.size() ;i ++) {
     		System.out.println(" Patron No :- " + (i-1) + "---------------");
     		System.out.println("Name of the Patron :- "+patrons.get(i).getName());
-    		System.out.println("Books in the Patron's cart :- " + patrons.get(i).getBooksInCart());
+    		patrons.get(i).printBooksInCart();;
     	}
     }
     
@@ -222,7 +235,8 @@ it should loop again
     		if(arrPatron.get(i).getName().equalsIgnoreCase(patronName)) {
     			System.out.println(" Patron's Name :- " + patronName);
                 System.out.println("Books that patron has checked out in cart " + arrPatron.get(i).getBooksCheckedOut());
-                System.out.println("Books in patron's cart :- " + arrPatron.get(i).getBooksInCart());
+                System.out.println("Books in patron's cart :- ");
+                		arrPatron.get(i).printBooksInCart();
                 check = true;
     		}
     	}

@@ -29,7 +29,7 @@ public class BookBuilder extends Observable{
         this.summary = summary;
         return this;
     }
-    public BookBuilder setCopyNumber(int copyNumber) {
+    public BookBuilder setCopyNumber(int copyNumber2) {
         this.copyNumber = copyNumber;
         return this;
     }

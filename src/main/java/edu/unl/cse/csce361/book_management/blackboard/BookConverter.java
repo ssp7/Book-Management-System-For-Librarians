@@ -59,13 +59,15 @@ Type
                 case "Summary":
                     builder.setSummary(mapping.get(Type));
                     break;
+                case "Copynumber":
+                	int copyNumber = Integer.parseInt(mapping.get(Type));
+                	builder.setCopyNumber(copyNumber);
+                	break;
             }
         }
         
     }
-    public static void main(String []args) {
-        bookConvert("books.csv");
-    }
+
 
 }
 

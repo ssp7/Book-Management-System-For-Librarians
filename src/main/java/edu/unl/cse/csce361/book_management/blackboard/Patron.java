@@ -120,23 +120,27 @@ public class Patron implements Observer {
         newPatron.setName(patronName);
         System.out.println("Please enter the author of the book");
         String authorName = scan.nextLine();
-        Boolean NeedToLoop = true;
-        while (NeedToLoop) {
+        boolean NeedToLoop = true;
+        while (NeedToLoop != false) {
             for (int i = 0; i < arrBooks.size(); i++) {
                 if (arrBooks.get(i).getAuthor().equalsIgnoreCase(authorName)) {
                     newPatron.CartSetup();
                     newPatron.AddBookIntoCart(arrBooks.get(i));
+                    
                     NeedToLoop = false;
                 }
+              
             }
             if (NeedToLoop == true){
                 System.out.println("Please enter correct author name");
+                authorName = scan.nextLine();
             }
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            newPatron.setDate(dtf.format(now));
-            arrPatron.add(newPatron);
+         
         }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        newPatron.setDate(dtf.format(now));
+        arrPatron.add(newPatron);
     }
 
 
@@ -229,11 +233,11 @@ public class Patron implements Observer {
     }
     public static void printBooksInCart() {
 
-        System.out.println("Here is the list of books in your cart sir");
+        System.out.println("Here is the list of books in cart");
 
         for(int i = 0; i<booksInCart.size();i++) {
 
-            System.out.println("Book Number :- " + i + " ----------------------------------------------------------------");
+            System.out.println("Book Number :- " + (i+1) + " ----------------------------------------------------------------");
             System.out.println("Author :- "+ booksInCart.get(i).getAuthor());
             System.out.println("Title :- "+ booksInCart.get(i).getTitle());
 
@@ -267,7 +271,7 @@ public class Patron implements Observer {
     	for(int i =0 ; i< arrPatron.size(); i++) {
     		if(arrPatron.get(i).getName().equalsIgnoreCase(patronName)) {
     			System.out.println(" Your Name :- " + patronName);
-                System.out.println("Books that you've checked out in cart " + arrPatron.get(i).getBooksCheckedOut());
+               printBooksInCart();
                 check = true;
     		}
     	}
