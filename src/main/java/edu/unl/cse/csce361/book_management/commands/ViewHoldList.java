@@ -13,7 +13,7 @@ public class ViewHoldList implements Command {
 
     @Override
     public String toString() {
-        return "View Hold List";
+        return "View Hold List for librarian";
 
     }
 }

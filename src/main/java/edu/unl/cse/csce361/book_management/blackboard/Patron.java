@@ -12,7 +12,7 @@ public class Patron implements Observer {
     /*
     This part for all parameters
      */
-    static ArrayList<Book> arrBooks = BookConverter.bookConvert("books.csv");
+    static ArrayList<Book> arrBooks = Librarian.getArrBooks();
     static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
     static Scanner scan = new Scanner(System.in);
     static Librarian librarian = new Librarian();

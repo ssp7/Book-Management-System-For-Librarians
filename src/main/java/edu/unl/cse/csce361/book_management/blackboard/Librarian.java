@@ -15,8 +15,12 @@ public class Librarian implements Observer
     static ArrayList<Patron> arrPatron = new ArrayList<Patron>();
     static Scanner scan = new Scanner(System.in);
     static Librarian librarian = new Librarian();
+   
+    public static ArrayList<Book> getArrBooks() {
+		return arrBooks;
+	}
 
-    public String getName() {
+	public String getName() {
         return name;
     }
 
@@ -138,7 +142,7 @@ it should loop again
  */
     public static void updateBookInfo() {
         Boolean NeedToLoop = true;
-        while (NeedToLoop) {
+        while (NeedToLoop == true) {
             System.out.println("Please enter 1 to change author name of the book");
             System.out.println("Please enter 2 to change the Title of book");
             System.out.println("Please enter 3 to change the call number of the book");
@@ -148,31 +152,40 @@ it should loop again
                 case 1: 
                     System.out.println("Please enter author of the book you want to change ");
                     String authorinput = scan.nextLine();
+                    boolean check = true;
+                    while(check == true) {
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getAuthor().equalsIgnoreCase(authorinput)) {
                             System.out.println("Please enter new author name");
                             String newAuthorName = scan.nextLine();
                             arrBooks.get(b).setAuthor(newAuthorName);
-                        } else {
-                            System.out.println("Please enter correct author name for book");
-                            authorinput = scan.nextLine();
-                            b = 0;
+                            check = false;
                         }
+                       
+                    }
+                    if(check == true) {
+                    System.out.println("Please enter correct author name for book");
+                    authorinput = scan.nextLine();
+                    }
                     }
                     NeedToLoop =false;
                     break;
                 case 2:
                     System.out.println("Please enter title of the book you would like to change");
                     String titleinput = scan.nextLine();
+                    boolean check2  = false;
+                    while(check2 == false) { 
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getTitle().equalsIgnoreCase(titleinput)) {
                             System.out.println("Please enter new title name");
                             String newTitleName = scan.nextLine();
                             arrBooks.get(b).setTitle(newTitleName);
-                        } else {
+                            check = true;
+                        } 
+                    }
+                        if(check2 == false) {
                             System.out.println("Please enter correct title for book");
-                            titleinput = scan.nextLine();
-                            b = 0;
+                            titleinput = scan.nextLine();	
                         }
                     }
                     NeedToLoop =false;
@@ -180,16 +193,24 @@ it should loop again
                 case 3:
                     System.out.println("Please enter the call number of the book you would like to change");
                     String callNumberInput = scan.nextLine();
+                    boolean check3 = false;
+                    while(check3 == false)
+                    {
                     for (int b = 0; b < arrBooks.size(); b++) {
                         if (arrBooks.get(b).getCallNumber().equalsIgnoreCase(callNumberInput)) {
                             System.out.println("Please enter new title name");
                             String newCallName = scan.nextLine();
                             arrBooks.get(b).setCallNumber(newCallName);
-                        } else {
+                            check = true;
+                        } 
+                       
+                    }
+                        if(check3 == false) {
+
                             System.out.println("Please enter correct title for book");
                             callNumberInput = scan.nextLine();
-                            b = 0;
                         }
+                    
                     }
                     break;
                 default:
@@ -221,22 +242,23 @@ it should loop again
     	for(int i = 0; i < patrons.size() ;i ++) {
     		System.out.println(" Patron No :- " + (i-1) + "---------------");
     		System.out.println("Name of the Patron :- "+patrons.get(i).getName());
-    		patrons.get(i).printBooksInCart();;
+    		patrons.get(i);
+			Patron.printBooksInCart();
     	}
     }
     
-    public void printSpecificPatronInfo() {
-    	
+    public void printSpecificPatronInfo() { 
+    	ArrayList<Patron> patrons = Patron.getArrPatron();
     	System.out.println("Please enter patron's name");
     	String patronName = scan.nextLine();
     	boolean check = false;
     	while(check == false) {
-    	for(int i =0 ; i< arrPatron.size(); i++) {
-    		if(arrPatron.get(i).getName().equalsIgnoreCase(patronName)) {
+    	for(int i =0 ; i< patrons.size(); i++) {
+    		if(patrons.get(i).getName().equalsIgnoreCase(patronName)) {
     			System.out.println(" Patron's Name :- " + patronName);
-                System.out.println("Books that patron has checked out in cart " + arrPatron.get(i).getBooksCheckedOut());
                 System.out.println("Books in patron's cart :- ");
-                		arrPatron.get(i).printBooksInCart();
+                		patrons.get(i);
+						Patron.printBooksInCart();
                 check = true;
     		}
     	}

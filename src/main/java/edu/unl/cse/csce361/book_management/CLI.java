@@ -13,10 +13,18 @@ import edu.unl.cse.csce361.book_management.commands.RemoveBookAsLibrarian;
 import edu.unl.cse.csce361.book_management.commands.SearchBookByAuthorOrTitle;
 import edu.unl.cse.csce361.book_management.commands.SetDateCommand;
 import edu.unl.cse.csce361.book_management.commands.UpdateBookInfoAsLibrarian;
+import edu.unl.cse.csce361.book_management.commands.ViewHoldList;
+import edu.unl.cse.csce361.book_management.commands.manipulateHoldList;
 
+import java.awt.Graphics;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.View;
+import javax.swing.text.Position.Bias;
 
 public class CLI {
     private List<Command> commands;
@@ -54,7 +62,9 @@ public class CLI {
         addCommand(new PrintAllPatronInfo());
         addCommand(new PrintSpecificPatronInfo());
         addCommand(new PrintPatronInfo());
-        
+        addCommand(new ViewHoldList());
+        addCommand(new manipulateHoldList());
+      
     }
 
     private void run() {
